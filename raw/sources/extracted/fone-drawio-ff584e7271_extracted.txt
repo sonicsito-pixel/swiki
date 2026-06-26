@@ -1,0 +1,60 @@
+
+--- Page 1 ---
+IDC - FONE
+F-ONE  WEB
+Software
+Jennifer
+Linux (Centos 7.9)
+WebtoB 5
+Nutanix
+F-ONE  WAS
+Software
+Jennifer
+Linux (Centos 7.9)
+JEUS 7
+Open JDK 1.6.0.45
+Nutanix
+FONE DB
+Software
+Sherpa
+Oracle 11.2.0.4.0
+Linux ( CentOS 7.9 )
+AONE DB
+Software
+Sherpa
+Oracle 11.2.0.4.0
+Linux ( CentOS 7.9 )
+EDW DB
+Software
+Sherpa
+Oracle 11.2.0.4.0
+Linux ( CentOS 7.9 )
+ESP2 DB
+Software
+MSSQL 2005
+Window 2008R2
+IDC - WMS
+WMS  WEB
+Software
+Jennifer
+Linux ( Rocky 8.6 )
+WebtoB 5
+Nutanix
+WMS  WAS
+Software
+Jennifer
+Linux ( Rocky 8.6 )
+JEUS 8
+Open JDK 1.8.0.402
+Nutanix
+WMS DB
+Software
+Sherpa
+Oracle 11.2.0.4.0
+Linux ( CentOS 7.9 )
+GWM DB ( online )
+Software
+Postgre DB ( 14.6 )
+Linux (Amazon Linux2)
+AWS RDS
+AWS Cloud

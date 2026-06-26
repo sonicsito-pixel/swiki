@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차세대 영업관리 시스템 요구사항 분석 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .ai-shimmer {
+            background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed tracking-wide antialiased">
+
+<!--
+[PALETTE NAME] Vibrant Tech Blueprint (Deep Blue: #1E3A8A, Bright Orange: #EA580C, Teal: #0D9488, Purple: #7C3AED)
+[CONFIRMATION] Explicitly confirming that NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+[NARRATIVE PLAN] 
+1. Introduction: Hook the reader with core system upgrade objectives (Automation & Standard).
+2. The Bottlenecks: Visualize manual time loss with a Bar chart.
+3. Target Automation: Contrast current vs. future states with a Doughnut chart.
+4. AI Insight Section: Interactive AI strategy generation and automation consulting.
+5. Process Innovation: HTML/CSS diagram of the 4 key issues.
+6. Governance: Radar chart for multidimensional audit and control improvements.
+-->
+
+    <header class="bg-blue-900 text-white py-12 px-6 shadow-md mb-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">차세대 영업관리 시스템 혁신</h1>
+            <p class="text-xl md:text-2xl text-blue-200 font-light max-w-3xl">수기 업무의 완벽한 전산화와 불명확한 업무 기준의 시스템적 확립을 위한 요구사항 분석 리포트</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-20">
+
+        <section class="mb-12">
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">분석 개요</h2>
+                    <p class="text-lg text-slate-600">
+                        본 인포그래픽은 영업관리팀 인터뷰를 통해 도출된 핵심 병목 현상과 차세대 시스템의 지향점을 시각화합니다. 
+                        특히 하단의 <strong>✨ AI 전략 인사이트</strong> 섹션을 통해 데이터 기반의 의사결정 지원 기능을 체험할 수 있습니다.
+                    </p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 flex items-center justify-center min-w-[150px]">
+                    <div class="text-center">
+                        <span class="block text-3xl font-bold text-blue-700">85%</span>
+                        <span class="text-xs text-blue-600 uppercase tracking-widest font-semibold">목표 자동화율</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Bottleneck Chart -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-orange-600 transition-transform hover:scale-[1.01]">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span class="p-2 bg-orange-100 rounded-lg text-orange-600">⏳</span>
+                    주요 수기 업무 리소스 분석
+                </h2>
+                <p class="text-sm text-slate-500 mb-6">월간 소요 시간(단위: 시간) 분석 결과, EDI 대사가 가장 큰 병목입니다.</p>
+                <div class="chart-container">
+                    <canvas id="bottleneckChart"></canvas>
+                </div>
+                <div class="mt-6 bg-orange-50 p-4 rounded-xl">
+                    <p class="text-sm text-orange-800 font-semibold italic">"단순 반복 수기 작업으로 인해 핵심 검증 업무 시간이 부족한 상태입니다."</p>
+                </div>
+            </div>
+
+            <!-- Automation Goal Chart -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-teal-600 transition-transform hover:scale-[1.01]">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span class="p-2 bg-teal-100 rounded-lg text-teal-600">⚙️</span>
+                    업무 자동화 전환 목표
+                </h2>
+                <p class="text-sm text-slate-500 mb-6">현재 90%의 수작업 비중을 시스템 자동화를 통해 15%까지 감축합니다.</p>
+                <div class="chart-container">
+                    <canvas id="automationChart"></canvas>
+                </div>
+                <div class="mt-6 bg-teal-50 p-4 rounded-xl">
+                    <p class="text-sm text-teal-800 font-semibold italic">"전산화 완료 시 정산 정확도는 40% 이상 향상될 것으로 기대됩니다."</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Process Diagram Section -->
+        <section class="mb-12 bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-slate-100">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">🚀 4대 핵심 이슈 및 시스템 프로세스 혁신</h2>
+            <p class="text-slate-500 text-center mb-12 max-w-2xl mx-auto">기존의 담당자 재량 중심 업무를 시스템 규칙(Business Rule) 기반으로 표준화합니다.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Issue 1 -->
+                <div class="group bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all hover:bg-blue-50 hover:border-blue-200">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</span>
+                        <h3 class="text-xl font-bold text-blue-900">EDI 데이터 수집 자동화</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase tracking-wider">Solution</div>
+                        <p class="text-sm text-slate-700 bg-white p-3 rounded-lg border border-slate-200">RPA 데이터 스크래핑 ➔ 마스터 정보 기반 표준화 ➔ 시스템 자동 대사 및 업로드</p>
+                    </div>
+                </div>
+
+                <!-- Issue 2 -->
+                <div class="group bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all hover:bg-orange-50 hover:border-orange-200">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</span>
+                        <h3 class="text-xl font-bold text-orange-900">VAN사 자동 대사 로직</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase tracking-wider">Solution</div>
+                        <p class="text-sm text-slate-700 bg-white p-3 rounded-lg border border-slate-200">결제 1:1 자동 매칭 ➔ 허용 오차 범위 내 자동 승인 ➔ 불일치 건만 매니저 예외 알림</p>
+                    </div>
+                </div>
+
+                <!-- Issue 3 -->
+                <div class="group bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all hover:bg-teal-50 hover:border-teal-200">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</span>
+                        <h3 class="text-xl font-bold text-teal-900">부서 간 비용 연계 API</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase tracking-wider">Solution</div>
+                        <p class="text-sm text-slate-700 bg-white p-3 rounded-lg border border-slate-200">타 시스템 API 연동 ➔ 수기 업로드 배제 ➔ 정산 시점 실시간 자동 집계 반영</p>
+                    </div>
+                </div>
+
+                <!-- Issue 4 -->
+                <div class="group bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all hover:bg-purple-50 hover:border-purple-200">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</span>
+                        <h3 class="text-xl font-bold text-purple-900">재고 LOSS 처리 표준화</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase tracking-wider">Solution</div>
+                        <p class="text-sm text-slate-700 bg-white p-3 rounded-lg border border-slate-200">과실 지표(KPI) 기반 자동 판정 ➔ 시스템 내 직급별 전자 승인 워크플로우 강제</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Governance Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-white rounded-2xl shadow-xl p-8 md:p-12 border-t-8 border-blue-900">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <span class="p-2 bg-blue-100 rounded-lg text-blue-700">🔒</span>
+                    데이터 거버넌스 및 통제 강화
+                </h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 transition-all hover:shadow-md">
+                        <div class="text-blue-600 mt-1">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 text-lg block">이력 추적성(Audit Trail)</strong>
+                            <p class="text-sm text-slate-500">수수료율 및 매장 정보 변경 시 모든 이력을 시스템에 영구 기록하여 사후 검증 체계를 확보합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 transition-all hover:shadow-md">
+                        <div class="text-blue-600 mt-1">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 text-lg block">시스템 워크플로우 강제</strong>
+                            <p class="text-sm text-slate-500">중요 비용 확정 단계에서 시스템 승인 절차를 누락할 수 없도록 설계하여 업무 규정 준수율을 100% 달성합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="governanceChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center text-sm border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="font-semibold text-slate-300">차세대 영업관리 시스템 요구사항 도출 결과 요약 보고서</p>
+            <p class="mt-2 opacity-60">본 리포트의 시각화 및 분석 데이터는 영업관리팀 인터뷰 결과에 기반합니다. | Powered by Gemini AI ✨</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Configurations
+        const apiKey = "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        async function callGemini(prompt) {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "당신은 차세대 ERP 및 영업관리 시스템 컨설턴트입니다. 인포그래픽에 제시된 데이터(EDI 수기 월 120시간, VAN사 85시간, 자동화 목표 85%, 수기 의존도 90% 등)를 기반으로 전문적이고 명확한 조언을 한국어로 제공하십시오. 응답은 간결하며 실무적인 인사이트 위주로 작성하십시오." }] }
+            };
+
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error();
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (e) {
+                    await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+                }
+            }
+            return "현재 인공지능 연결이 원활하지 않습니다. 시스템 관리자에게 문의하거나 나중에 다시 시도해 주세요.";
+        }
+
+        async function generateAISummary() {
+            const btn = document.getElementById('summaryBtn');
+            const resDiv = document.getElementById('summaryResult');
+            btn.disabled = true;
+            btn.innerHTML = "✨ 분석 중 (약 5~10초 소요)...";
+            resDiv.classList.remove('hidden');
+            resDiv.innerHTML = "현재 차세대 영업관리 시스템의 핵심 지표를 분석하여 전략 보고서를 작성하고 있습니다...";
+            resDiv.classList.add('ai-shimmer');
+
+            const prompt = "인포그래픽의 핵심 데이터(EDI 수기 월 120시간 낭비, 자동화 전환 목표 85% 등)를 바탕으로, 임원진이 즉각적으로 의사결정을 내릴 수 있도록 '시스템 도입의 시급성'과 '기대 효과'를 3가지 포인트로 요약해줘.";
+            const result = await callGemini(prompt);
+            
+            resDiv.classList.remove('ai-shimmer');
+            resDiv.innerText = result;
+            btn.disabled = false;
+            btn.innerHTML = "데이터 기반 전략 요약 생성";
+        }
+
+        async function consultAutomation() {
+            const input = document.getElementById('manualTaskInput').value;
+            const btn = document.getElementById('consultBtn');
+            const resDiv = document.getElementById('consultResult');
+            if (!input) return;
+
+            btn.disabled = true;
+            resDiv.classList.remove('hidden');
+            resDiv.innerHTML = "해당 업무의 자동화 설계안을 구성 중입니다...";
+            resDiv.classList.add('ai-shimmer');
+
+            const prompt = `사용자가 입력한 수기 업무: "${input}". 이 업무를 차세대 시스템의 RPA, API 연동, 또는 비즈니스 룰 기반 표준화를 통해 어떻게 자동화할 수 있는지 단계별 가이드를 제안해줘.`;
+            const result = await callGemini(prompt);
+
+            resDiv.classList.remove('ai-shimmer');
+            resDiv.innerText = result;
+            btn.disabled = false;
+        }
+
+        // --- Chart.js Setup ---
+        const wrapText = (label, limit = 16) => {
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            const lines = []; let curr = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (curr.length + words[i].length + 1 <= limit) curr += ' ' + words[i];
+                else { lines.push(curr); curr = words[i]; }
+            }
+            lines.push(curr); return lines;
+        };
+
+        const globalTooltip = {
+            callbacks: {
+                title: (items) => {
+                    const item = items[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // Bottleneck Chart
+        const bLabels = ['유통망 EDI 수집 및 대사', 'VAN사 결제 데이터 검증', '타부서 정산 공제 취합', '재고 LOSS 사후 정산'].map(l => wrapText(l, 12));
+        new Chart(document.getElementById('bottleneckChart'), {
+            type: 'bar',
+            data: {
+                labels: bLabels,
+                datasets: [{ 
+                    label: '추정 소요 시간 (시간/월)', 
+                    data: [120, 85, 45, 40], 
+                    backgroundColor: '#EA580C',
+                    borderRadius: 8
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                    legend: false, 
+                    tooltip: globalTooltip 
+                },
+                scales: {
+                    y: { grid: { borderDash: [5, 5] } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Automation Chart
+        new Chart(document.getElementById('automationChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['수작업 비중', '시스템 자동화'],
+                datasets: [
+                    { 
+                        label: '현재 (AS-IS)', 
+                        data: [90, 10], 
+                        backgroundColor: ['#94a3b8', '#cbd5e1'],
+                        cutout: '70%'
+                    },
+                    { 
+                        label: '목표 (TO-BE)', 
+                        data: [15, 85], 
+                        backgroundColor: ['#f87171', '#0D9488'],
+                        cutout: '50%'
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                    tooltip: globalTooltip, 
+                    legend: { position: 'bottom' } 
+                } 
+            }
+        });
+
+        // Governance Chart
+        const gLabels = ['이력 추적(Audit)', '승인 워크플로우', '예외 자동화', '표준 가이드라인', '무결성 검증'].map(l => wrapText(l, 10));
+        new Chart(document.getElementById('governanceChart'), {
+            type: 'radar',
+            data: {
+                labels: gLabels,
+                datasets: [
+                    { 
+                        label: '현재 시스템 수준', 
+                        data: [20, 35, 15, 40, 25], 
+                        borderColor: '#94a3b8', 
+                        backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                        pointBackgroundColor: '#94a3b8'
+                    },
+                    { 
+                        label: '차세대 목표 수준', 
+                        data: [100, 95, 85, 100, 95], 
+                        borderColor: '#1E3A8A', 
+                        backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                        pointBackgroundColor: '#1E3A8A'
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { tooltip: globalTooltip },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

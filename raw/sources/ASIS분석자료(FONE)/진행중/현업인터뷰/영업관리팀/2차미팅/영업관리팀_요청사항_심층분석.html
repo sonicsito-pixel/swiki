@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차세대 FA-ONE 영업관리 심층 분석 및 방향성</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #2563eb;
+            color: #1d4ed8;
+            font-weight: 700;
+            background-color: #eff6ff;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 1024px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 antialiased">
+
+    <!-- Chosen Palette: Corporate Trust (Slate-50 to Slate-900) with Blue-600 (Primary), Red-500 (Alert/High Priority), and Emerald-500 (Automation/Success) -->
+    <!-- Application Structure Plan: A single-page dashboard structured into three main views: 1. Executive Summary (Key Insights & Stats), 2. Priority Chart (Chart.js based priority mapping), and 3. Interactive Deep-Dive Matrix (Filtering capabilities by category to show Analysis, Dev Targets, and Interview Questions). This architecture allows the IT team to present high-level summaries to executives while quickly drilling down into technical details during the 2nd face-to-face interview, ensuring no critical requirement is missed. -->
+    <!-- Visualization & Content Choices: 1. KPI Cards -> Inform -> Dynamic numerical summaries -> Instant grasp of project scope. 2. Radar/Bar Chart (Chart.js) -> Compare -> Interactive visualization of Importance vs Category -> Helps prioritize interview time allocation -> Chart.js (NO SVG). 3. Filterable Action Cards -> Organize -> JS-driven DOM manipulation -> Clickable categories reveal deep-dive analysis and precise interview scripts -> Clean UI for dense information. NO Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <header
+            class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-slate-200 pb-6">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-wider mb-3">
+                    <span>DEEP RESEARCH REPORT</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-2">차세대 영업관리 2차 심층 분석 및
+                    방향성</h1>
+                <p class="text-slate-500 font-medium">영업관리팀 피드백 기반 핵심 개발 요건 및 대면 인터뷰 Action Plan</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-right">
+                <p class="text-sm font-bold text-slate-700">신성통상 IT기획팀</p>
+                <p class="text-xs text-slate-400">2026. 04. 29</p>
+            </div>
+        </header>
+
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <span class="text-2xl">💡</span> Executive Summary
+            </h2>
+            <p class="text-slate-600 mb-6 bg-white p-5 rounded-xl border border-slate-200 shadow-sm leading-relaxed">
+                영업관리팀 2차 인터뷰 피드백을 심층 분석한 결과, 현업의 핵심 니즈는 단순한 '화면 개선'이 아닌 <b>'데이터의 영속성 확보'</b>와 <b>'오류(Human Error)를 원천
+                    차단하는 강력한 시스템 통제'</b>에 집중되어 있습니다. 특히 미수금 관리의 로그인 제한 조치, 트러스빌 역발행 연동, 매장코드 중심의 이력 관리는 비즈니스 임팩트가 매우 높은
+                우선순위 5점 항목입니다. 본 대시보드는 차세대 시스템 개발 방향성과 다가오는 2차 대면 인터뷰에서 반드시 확답을 받아야 할 <b>Rule & Control</b> 기준을 제시합니다.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm flex flex-col items-center justify-center text-center">
+                    <span class="text-3xl mb-2">🔥</span>
+                    <span class="text-3xl font-extrabold text-slate-800" id="stat-high">0</span>
+                    <span class="text-xs font-bold text-slate-400 mt-1 uppercase">우선순위 5점(최상)</span>
+                </div>
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm flex flex-col items-center justify-center text-center">
+                    <span class="text-3xl mb-2">⚙️</span>
+                    <span class="text-3xl font-extrabold text-blue-600" id="stat-auto">0</span>
+                    <span class="text-xs font-bold text-slate-400 mt-1 uppercase">RPA / 자동화 요건</span>
+                </div>
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm flex flex-col items-center justify-center text-center">
+                    <span class="text-3xl mb-2">🛡️</span>
+                    <span class="text-3xl font-extrabold text-emerald-600" id="stat-rule">0</span>
+                    <span class="text-xs font-bold text-slate-400 mt-1 uppercase">통제/이력관리 요건</span>
+                </div>
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm flex flex-col items-center justify-center text-center">
+                    <span class="text-3xl mb-2">🎯</span>
+                    <span class="text-3xl font-extrabold text-indigo-600">4</span>
+                    <span class="text-xs font-bold text-slate-400 mt-1 uppercase">핵심 논의 아젠다</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 mb-10">
+
+            <div class="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h2 class="text-lg font-bold text-slate-800 mb-4">요구사항 중요도 분포</h2>
+                <p class="text-sm text-slate-500 mb-6">각 카테고리별 요구사항의 중요도(1~5) 평균 및 집중도를 시각화합니다. 채권/미수 및 매장관리 영역의 중요도가 가장
+                    높습니다.</p>
+                <div class="chart-container">
+                    <canvas id="priorityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col h-full">
+                <h2 class="text-lg font-bold text-slate-800 mb-4">2차 대면 인터뷰 영역별 필터링</h2>
+                <p class="text-sm text-slate-500 mb-6">아래 탭을 클릭하여 각 영역별 심층 분석 결과, 차세대 시스템 개발 목표, 그리고 인터뷰 시 던져야 할 핵심 질문을
+                    확인하세요.</p>
+
+                <div class="flex overflow-x-auto hide-scroll gap-2 border-b border-slate-200 pb-2 mb-6"
+                    id="tab-container">
+                </div>
+
+                <div class="flex-1 overflow-y-auto pr-2 custom-scroll" id="content-container"
+                    style="max-height: 500px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-2xl p-8 text-white shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">📋</span>
+                <h2 class="text-2xl font-bold">2차 대면 인터뷰 필수 Action Checklist</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-700/50 p-5 rounded-xl border border-slate-600">
+                    <h3 class="text-emerald-400 font-bold mb-3">1. 정책 및 임계치 확정 (Rule Setting)</h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">☐</span> VAN사 매출 대사
+                            시 시스템 자동 조정(가품번 털어내기)을 허용하는 정확한 원단위 오차 금액 (예: 10원 미만) 확정</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">☐</span> 현금 미수 100만
+                            원 이상 시 적용할 페널티(로그인 제한, 출고 정지 등)의 강도 및 예외 승인권자 지정</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">☐</span> 공제 세금계산서 자동
+                            발행 시 부서별 비용(수선비 등) 집계 컷오프(Cut-off) 마감 일자 확정</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-700/50 p-5 rounded-xl border border-slate-600">
+                    <h3 class="text-blue-400 font-bold mb-3">2. 데이터 마이그레이션 범위 합의 (Data Mig)</h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 font-bold">☐</span> 매장 식별키를
+                            사업자번호에서 '매장코드'로 전환 시, 과거 분리되어 있던 기존 매출/채권 데이터의 병합 범위 확정</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 font-bold">☐</span> 중간관리자 수수료율 이력
+                            관리 도입 전, 기존 엑셀로 관리되던 과거 수수료율 변동 데이터의 시스템 이관 필요 여부</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const dbData = [
+            {
+                id: "ST-01",
+                category: "매장관리",
+                importance: 5,
+                type: "통제/이력",
+                title: "식별키 '매장코드' 전면 전환",
+                analysis: "현재 사업자번호 변경 시 새로운 매장으로 인식되어 과거 실적 및 미수금 추적의 연속성이 단절됨. '하나의 사업자에 다수 브랜드 존재' 및 '특정매입/직영 식별' 로직을 훼손하지 않으면서 영속성을 유지해야 함.",
+                devTarget: "매장 마스터 테이블 구조 재설계. 매장코드(PK)와 사업자번호(1:N) 이력 테이블 분리. 매출 및 미수 원장에 사업자번호가 아닌 매장코드를 최상위 기준으로 매핑.",
+                interviewQ: "사업자 변경 시 기존 데이터를 통합하여 조회할 때, 재무적 정산(세금계산서) 기준과 영업 분석 기준이 충돌하는 케이스가 있습니까? 있다면 화면 분리가 필요합니까?"
+            },
+            {
+                id: "SA-02",
+                category: "매출/정산",
+                importance: 4,
+                type: "RPA/자동화",
+                title: "VAN사/EDI 매출 확정 완전 자동화",
+                analysis: "담당자가 일일이 수기로 대사하는 월 100시간 이상의 비효율 존재. 데이터가 100% 일치하지 않는 소액 차액(1원~10원 등) 때문에 자동화가 막혀 있음.",
+                devTarget: "유통망 EDI 및 VAN(머니온 등) API 직접 연동 배치 개발. 자동 대사 로직 구현 및 '오차 허용 임계치' 내 금액을 특정 가품번(LOSS/이익)으로 자동 기표하는 모듈 구축.",
+                interviewQ: "시스템이 차액을 털어버릴 수 있는(자동 조정) 최대 허용 금액(Max)은 정확히 얼마로 규정해야 재무적 리스크가 없습니까?"
+            },
+            {
+                id: "CM-01",
+                category: "중간관리자",
+                importance: 5,
+                type: "통제/이력",
+                title: "수수료율 이력 관리 및 역발행",
+                analysis: "수수료 오기재로 인한 금전 사고(오지급) 리스크가 큼. 변경 히스토리가 남지 않아 책임 소재가 불분명하며, 세금계산서를 별도 사이트(트러스빌)에서 수기 세팅하는 이중 작업 발생.",
+                devTarget: "수수료율 이력(History) 테이블 신설 및 기간별 유효성(Start-End Date) 로직 적용. 계산 결과 확정 시 트러스빌 API를 통한 역발행 즉시 연동 및 2중 승인 결재선 개발.",
+                interviewQ: "오류 방지를 위해 '영업관리팀 기안 -> 재무팀 최종 승인' 의 2중 승인 프로세스를 시스템에 강제하는 것에 대해 영업현장의 반발은 없겠습니까?"
+            },
+            {
+                id: "CM-03",
+                category: "중간관리자",
+                importance: 4,
+                type: "RPA/자동화",
+                title: "수선비/공제 항목 사전 셋팅 및 자동화",
+                analysis: "매장 부담금(판/부자재, 수선비, 택배비 등)을 각 부서에 확인하여 수기로 집계하고 정산에 차감하는 과정에서 누락 발생.",
+                devTarget: "비용 원천 부서(물류, AS팀 등) 시스템과 중간관리 정산 모듈 간의 공제 데이터 자동 인터페이스(I/F) 구축. 매장별 공제 분담율 사전 설정(Pre-set) 기능 개발.",
+                interviewQ: "수선비 등 타 부서 데이터가 매월 며칠까지 시스템에 입력 완료(Cut-off)되어야 영업관리 정산 일정에 차질이 없습니까?"
+            },
+            {
+                id: "AR-02",
+                category: "채권/미수",
+                importance: 5,
+                type: "통제/이력",
+                title: "장기 미수 강력 통제 및 팝업",
+                analysis: "악성 채권을 사전에 방지하기 위한 안전장치 부재. 고액 미수 발생 시에도 담당자가 엑셀로 조회하기 전까지는 즉각적인 인지가 불가함.",
+                devTarget: "미수 원장 실시간 집계 배치. 임계치(예: 현금미수 100만원) 초과 시 로그인 단계에서 Block 처리 또는 강제 팝업창을 띄우는 권한 통제 시스템(Interceptor) 구현.",
+                interviewQ: "미수금 100만 원 이상 시 '출고 정지'나 '로그인 제한' 같은 강력한 통제 기능을 걸었을 때, 주말이나 긴급 상황에서 임시로 해제할 수 있는 권한은 누구에게 부여해야 합니까?"
+            },
+            {
+                id: "AR-01",
+                category: "채권/미수",
+                importance: 4,
+                type: "RPA/자동화",
+                title: "입금 예정일/계좌 자동 매핑 체크",
+                analysis: "매입사(카드, 페이)별로 입금 예정일과 계좌가 달라, 차액 확인을 위해 여러 CMS 화면과 FONE 화면을 번갈아보는 비효율.",
+                devTarget: "매입사별 결제 조건(D+N) 마스터화. 달력 영업일 기준 입금 예정액 산출 및 실제 가상계좌 입금 내역 실시간 대사(Reconciliation) 모듈 개발.",
+                interviewQ: "상품권 반품 등 예외적인 마이너스 입금이나 이월 정산 건이 발생할 때, 해당 차액을 다음 달로 이월할지 당월 미수로 잡을지 명확한 전산 기준이 필요합니다."
+            }
+        ];
+
+        const categories = [...new Set(dbData.map(item => item.category))];
+        let activeCategory = categories[0];
+
+        function initDashboard() {
+            let highPriority = 0;
+            let autoCount = 0;
+            let ruleCount = 0;
+
+            dbData.forEach(item => {
+                if (item.importance === 5) highPriority++;
+                if (item.type === "RPA/자동화") autoCount++;
+                if (item.type === "통제/이력") ruleCount++;
+            });
+
+            document.getElementById('stat-high').textContent = highPriority;
+            document.getElementById('stat-auto').textContent = autoCount;
+            document.getElementById('stat-rule').textContent = ruleCount;
+
+            renderTabs();
+            renderContent();
+            renderChart();
+        }
+
+        function renderTabs() {
+            const container = document.getElementById('tab-container');
+            container.innerHTML = '';
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.textContent = cat;
+                btn.className = `px-5 py-3 text-sm font-semibold rounded-t-lg transition-colors whitespace-nowrap outline-none ${cat === activeCategory ? 'tab-active' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100 border-b-2 border-transparent'}`;
+                btn.onclick = () => {
+                    activeCategory = cat;
+                    renderTabs();
+                    renderContent();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderContent() {
+            const container = document.getElementById('content-container');
+            container.innerHTML = '';
+
+            const filteredData = dbData.filter(item => item.category === activeCategory);
+
+            filteredData.forEach(item => {
+                const badgeColor = item.importance === 5 ? 'bg-red-100 text-red-700 border-red-200' : 'bg-amber-100 text-amber-700 border-amber-200';
+                const typeIcon = item.type === "RPA/자동화" ? "⚙️" : "🛡️";
+
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-200 rounded-xl p-5 mb-4 card-hover";
+
+                card.innerHTML = `
+            <div class="flex justify-between items-start mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold px-2 py-1 rounded border ${badgeColor}">중요도 ${item.importance}</span>
+                    <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">${item.id}</span>
+                </div>
+                <span class="text-xl" title="${item.type}">${typeIcon}</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-4">${item.title}</h3>
+            
+            <div class="space-y-4">
+                <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-slate-300">
+                    <h4 class="text-xs font-bold text-slate-500 mb-1 uppercase tracking-wider">Deep Analysis</h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">${item.analysis}</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="text-xs font-bold text-blue-500 mb-1 uppercase tracking-wider">System Dev Target</h4>
+                    <p class="text-sm text-blue-900 font-medium leading-relaxed">${item.devTarget}</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-400">
+                    <h4 class="text-xs font-bold text-emerald-600 mb-1 uppercase tracking-wider">2nd Interview Question</h4>
+                    <p class="text-sm text-emerald-900 font-bold leading-relaxed">" ${item.interviewQ} "</p>
+                </div>
+            </div>
+        `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('priorityChart').getContext('2d');
+
+            const catLabels = categories;
+            const importanceAverages = catLabels.map(cat => {
+                const items = dbData.filter(d => d.category === cat);
+                const sum = items.reduce((acc, curr) => acc + curr.importance, 0);
+                return sum / items.length;
+            });
+
+            const autoCounts = catLabels.map(cat => dbData.filter(d => d.category === cat && d.type === "RPA/자동화").length);
+            const ruleCounts = catLabels.map(cat => dbData.filter(d => d.category === cat && d.type === "통제/이력").length);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: catLabels,
+                    datasets: [
+                        {
+                            label: '평균 중요도 Score (Max 5)',
+                            data: importanceAverages,
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderRadius: 4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '통제/이력 요건 수',
+                            data: ruleCounts,
+                            type: 'line',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: 'Pretendard' } } },
+                        tooltip: { titleFont: { family: 'Pretendard' }, bodyFont: { family: 'Pretendard' } }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { type: 'linear', display: true, position: 'left', min: 0, max: 5.5, ticks: { stepSize: 1 } },
+                        y1: { type: 'linear', display: true, position: 'right', min: 0, max: 3, ticks: { stepSize: 1 }, grid: { drawOnChartArea: false } }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+
+</html>

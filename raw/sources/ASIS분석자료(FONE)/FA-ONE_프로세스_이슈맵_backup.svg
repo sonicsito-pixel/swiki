@@ -1,0 +1,188 @@
+<svg width="1200" height="980" viewBox="0 0 1200 980" xmlns="http://www.w3.org/2000/svg">
+  <!-- Style Definitions -->
+  <style>
+    .title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #00205B; }
+    .subtitle { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; fill: #475569; }
+    .block-bg { fill: #F8FAFC; }
+    .block-top { fill: #00205B; }
+    .block-num { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #00205B; }
+    .block-sub { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; fill: #64748B; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .divider { stroke: #E2E8F0; stroke-width: 1.5px; }
+    .bullet { fill: #005EB8; }
+    .item-text { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13.5px; fill: #334155; }
+    .arrow-line { stroke: #00205B; stroke-width: 1.5px; }
+    .arrow-head { fill: #00205B; }
+    .footer-bg { fill: #F1F5F9; }
+    .footer-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13.5px; font-weight: bold; fill: #00205B; }
+    .footer-text { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13.5px; fill: #475569; }
+    
+    /* Issue Box Styles */
+    .issue-box { fill: #FEF2F2; stroke: #EF4444; stroke-width: 1.5px; rx: 6px; }
+    .issue-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #B91C1C; }
+    .issue-text { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; fill: #7F1D1D; line-height: 1.4; }
+  </style>
+
+  <!-- Background & Top Rule -->
+  <rect width="1200" height="980" fill="#FFFFFF" />
+  <rect width="1200" height="8" fill="#00205B" />
+
+  <!-- Header -->
+  <text x="50" y="60" class="title">FA-ONE 프로세스 및 핵심 이슈 맵 (Issue Map)</text>
+  <text x="50" y="90" class="subtitle">현행(AS-IS) 6대 밸류체인 프로세스 현황 및 영역별 병목·한계점 진단 요약</text>
+
+  <!-- ==================== ROW 1 ==================== -->
+  
+  <!-- Block 1: 정보관리 -->
+  <g transform="translate(50, 140)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">01. 정보 관리</text>
+    <text x="25" y="55" class="block-sub">Master Data Management</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">브랜드 및 품종 마스터 체계 관리</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">칼라 및 기획 사이즈 표준화 등록</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">신규 거래처 및 매장 기본/상세 정보</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">판/부자재 분담률 기준 세팅</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• 수기 입력(매장 ID 등)에 따른 오입력 리스크 상존</text>
+    <text x="32" y="260" class="issue-text">• 매장 정보 변경 내역에 대한 History 관리 부재</text>
+    <text x="32" y="280" class="issue-text">• 미사용 매장 유형/분류 체계 산재 (정리 필요)</text>
+    <text x="32" y="300" class="issue-text">• 상위 브랜드 코드 확장 한계 임박</text>
+  </g>
+
+  <!-- Connection 1 -> 2 -->
+  <line x1="390" y1="310" x2="422" y2="310" class="arrow-line" />
+  <polygon points="422,306 430,310 422,314" class="arrow-head" />
+
+  <!-- Block 2: 상품기획 -->
+  <g transform="translate(430, 140)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">02. 상품 기획</text>
+    <text x="25" y="55" class="block-sub">Merchandising &amp; Sourcing</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">제품 코드 채번 및 스타일/속성 정보</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">자재 사양 및 사이즈 스펙 관리</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">작업지시서 기반의 연계 생산 지시</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">사전/생산 원가 및 패킹 계획 수립</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• 제품/작업지시/스타일 정보 간 일관성 유지 한계</text>
+    <text x="32" y="260" class="issue-text">  → 극복안: Centric PLM 시스템 중심 대체 검토</text>
+    <text x="32" y="280" class="issue-text">• 수기로 처리되는 TAG 라벨 발주 업무 병목</text>
+    <text x="32" y="300" class="issue-text">  → 극복안: RFID 연계 기반 전산/자동화 필요</text>
+  </g>
+
+  <!-- Connection 2 -> 3 -->
+  <line x1="770" y1="310" x2="802" y2="310" class="arrow-line" />
+  <polygon points="802,306 810,310 802,314" class="arrow-head" />
+
+  <!-- Block 3: 물류관리 -->
+  <g transform="translate(810, 140)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">03. 물류 관리</text>
+    <text x="25" y="55" class="block-sub">Logistics &amp; Inventory</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">생산처 연계 입고 및 매장 출고 지시</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">창고 간 제품 이동 및 실사 내역 반영</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">온/오프라인 반품 수집 및 검수 처리</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">물류센터 기반 자가소모 및 업체 반품</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• FA-ONE vs WMS 창고 기준 불일치로 수불 모호</text>
+    <text x="32" y="260" class="issue-text">• BLIND 반품 프로세스 부재 (이력 누락 발생)</text>
+    <text x="32" y="280" class="issue-text">• 온라인/매장 간 불필요한 이동 이력 양산</text>
+    <text x="32" y="300" class="issue-text">• 자가소모 시 물류센터 선 이동(반품) 필수 제약</text>
+  </g>
+
+  <!-- Connection 3 -> 4 -->
+  <line x1="980" y1="480" x2="980" y2="512" class="arrow-line" />
+  <polygon points="976,512 980,520 984,512" class="arrow-head" />
+
+  <!-- ==================== ROW 2 (Reverse Order) ==================== -->
+
+  <!-- Block 4: 영업기획 -->
+  <g transform="translate(810, 520)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">04. 영업 기획</text>
+    <text x="25" y="55" class="block-sub">Sales Strategy &amp; Allocation</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">매장별/기간별 매출 목표 수립 및 배분</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">매장 배분 등급 설정 및 출고 요청 (RT)</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">상품/주문 단위 할인 프로모션 기획</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">시즌/긴급 반품 차수 및 지시 등록</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• 매장 매출 목표 데이터에 대한 History 관리 부재</text>
+    <text x="32" y="260" class="issue-text">• 목표 변경 이력 추적 불가로 목표 대비 실적</text>
+    <text x="32" y="280" class="issue-text">  데이터의 신뢰성 및 투명성 저하 발생</text>
+  </g>
+
+  <!-- Connection 4 -> 5 -->
+  <line x1="810" y1="690" x2="778" y2="690" class="arrow-line" />
+  <polygon points="778,686 770,690 778,694" class="arrow-head" />
+
+  <!-- Block 5: 매장관리 -->
+  <g transform="translate(430, 520)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">05. 매장 관리</text>
+    <text x="25" y="55" class="block-sub">Store Operations (F-POS)</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">F-POS 기반 실시간 판매/환불 등록</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">매장 간 재고 이동(RT) 요청 및 이행</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">매장 내 실사 및 재고 조정 차이분 처리</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">매장 근무자 출결 등록 및 본사 승인</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• 점간 이동(RT) 진행 시 재고 귀속 모호성 발생</text>
+    <text x="32" y="260" class="issue-text">  (인수 확정 전까지 인도 매장의 재고로 잔존)</text>
+    <text x="32" y="280" class="issue-text">• 이동 중 재고 파악을 위한 '가상창고(In-transit)'</text>
+    <text x="32" y="300" class="issue-text">  개념 도입 및 수불 반영 필요성 대두</text>
+  </g>
+
+  <!-- Connection 5 -> 6 -->
+  <line x1="430" y1="690" x2="398" y2="690" class="arrow-line" />
+  <polygon points="398,686 390,690 398,694" class="arrow-head" />
+
+  <!-- Block 6: 영업관리 -->
+  <g transform="translate(50, 520)">
+    <rect width="340" height="340" class="block-bg" />
+    <rect width="340" height="4" class="block-top" />
+    <text x="25" y="35" class="block-num">06. 영업 관리</text>
+    <text x="25" y="55" class="block-sub">Financial Settlement &amp; Closing</text>
+    <line x1="25" y1="70" x2="315" y2="70" class="divider" />
+    <rect x="25" y="87" width="4" height="4" class="bullet" /><text x="38" y="93" class="item-text">유통망(백화점 등) EDI 마진 대사 및 검증</text>
+    <rect x="25" y="112" width="4" height="4" class="bullet" /><text x="38" y="118" class="item-text">매장 수불 마감 및 월 정산 상세 확정</text>
+    <rect x="25" y="137" width="4" height="4" class="bullet" /><text x="38" y="143" class="item-text">중간관리자 수수료 산출 및 세금계산서</text>
+    <rect x="25" y="162" width="4" height="4" class="bullet" /><text x="38" y="168" class="item-text">회계 시스템(AIS) 전표 전송 및 채권 관리</text>
+    
+    <!-- Issue Box -->
+    <rect x="20" y="195" width="300" height="120" class="issue-box" />
+    <text x="32" y="218" class="issue-title">⚠️ 주요 현안 (ISSUE)</text>
+    <text x="32" y="240" class="issue-text">• 유통망별 EDI 정보 대사 작업의 과도한 수기 의존</text>
+    <text x="32" y="260" class="issue-text">  → 극복안: RPA 도입을 통한 수집/대사 자동화</text>
+    <text x="32" y="280" class="issue-text">• 판/부자재, 수선비 등 각종 공제 내역의 엑셀 수기</text>
+    <text x="32" y="300" class="issue-text">  관리로 전산화 및 특수 재고(LOSS) 프로세스 필요</text>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(50, 890)">
+    <rect width="1100" height="44" class="footer-bg" rx="4" />
+    <text x="20" y="27" class="footer-title">핵심 요약 (Summary) :</text>
+    <text x="160" y="27" class="footer-text">현행 시스템은 기준 정보 확장 한계, 시스템 간 수불 불일치, 그리고 수기/엑셀 의존 정산에 따른 리스크를 안고 있으며, 차세대 전환이 시급함.</text>
+  </g>
+</svg>

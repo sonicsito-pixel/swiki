@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>차세대 시스템(F-IT) 개선 방향성</title>
+<style>
+    body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; margin: 20px; }
+    h2 { color: #333; }
+    table { border-collapse: collapse; width: 100%; max-width: 1200px; font-size: 14px; }
+    th, td { border: 1px solid #cccccc; padding: 12px; text-align: left; vertical-align: middle; }
+    th { background-color: #f4f6f8; font-weight: bold; text-align: center; color: #333; }
+    .category { background-color: #eef2f5; font-weight: bold; text-align: center; }
+    .highlight { color: #0056b3; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>차세대 시스템(F-IT) 개선 방향성 (AS-IS vs TO-BE)</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th width="15%">영역</th>
+            <th width="15%">구분</th>
+            <th width="25%">AS-IS (현행 시스템)</th>
+            <th width="25%">TO-BE (차세대 시스템 방향성)</th>
+            <th width="20%">기대 효과</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- 1. 데이터 구조 및 화면 구성 -->
+        <tr>
+            <td rowspan="2" class="category">1. 데이터 구조 및<br>화면 구성</td>
+            <td align="center">필드 관리</td>
+            <td>총 291개 항목 중 과거(2018년 이전) 데이터, 의미 없는 더미 데이터("9999-12-31" 등) 방치</td>
+            <td><span class="highlight">미사용 항목 34개 과감히 삭제/숨김 처리</span><br>(각종 추정원가, 우편번호, 중간관리자 상세정보 등)</td>
+            <td>DB 경량화 및 화면 로딩 속도 개선</td>
+        </tr>
+        <tr>
+            <td align="center">입력 방식</td>
+            <td>대부분의 항목을 사용자가 일일이 수기 입력</td>
+            <td>기준 정보에 따른 <span class="highlight">'자동 기입' 및 '기본값 세팅' 대폭 확대</span></td>
+            <td>업무 피로도 감소 및 데이터 오입력(Human Error) 방지</td>
+        </tr>
+
+        <!-- 2. 매장 정보 관리 -->
+        <tr>
+            <td rowspan="6" class="category">2. 매장 정보 관리</td>
+            <td align="center">국내/해외 구분</td>
+            <td>'과세/비과세' 항목을 통해 간접적으로 국내와 해외 매장을 구분</td>
+            <td><span class="highlight">'국내/해외' 및 '국가명' 관리 필드 신설</span>을 통한 명확한 구분</td>
+            <td>글로벌 비즈니스 확장에 대비한 정확한 매장 통계 산출</td>
+        </tr>
+        <tr>
+            <td align="center">브랜드 세분화</td>
+            <td>탑텐 매장의 성인/키즈/복합 구분이 시스템에 없어, 담당자가 엑셀로 수기 분류</td>
+            <td>시스템 내 매장 속성으로 <span class="highlight">'성인/키즈/복합' 구분자 추가</span></td>
+            <td>별도 수기 작업 없이 시스템 내에서 정확한 매출 및 재고 분석 가능</td>
+        </tr>
+        <tr>
+            <td align="center">식별자 및 이력</td>
+            <td>사업자번호 기반 관리로 점주 변경 시 이력 단절, 부서코드와 매장코드 혼용</td>
+            <td><span class="highlight">영구 매장코드(Universal ID) 도입</span> 및 점주 변경 <span class="highlight">이력(SCD) 관리</span></td>
+            <td>매장별 생애주기 데이터 확보 및 전사 정합성 강화</td>
+        </tr>
+        <tr>
+            <td align="center">입력 거버넌스</td>
+            <td>한 화면에서 모든 정보를 입력하여 부서별(영업/회계/물류) 입력 누락 잦음</td>
+            <td>부서별 <span class="highlight">전용 입력 탭(Tab) 및 워크플로우</span> 기반 필수값 검증</td>
+            <td>부서별 책임 소재 명확화 및 데이터 오입력 원천 차단</td>
+        </tr>
+        <tr>
+            <td align="center">다차원 속성</td>
+            <td>평수, 상권, VMD 정보 등 분석용 속성이 없어 담당자별 엑셀로 별도 관리</td>
+            <td><span class="highlight">사용자 정의 속성(Attribute) 엔진</span> 도입으로 리포트 조건 연동</td>
+            <td>분석 기초 데이터 추출 공수 절감 및 의사결정 속도 개선</td>
+        </tr>
+        <tr>
+            <td align="center">계약 및 수수료</td>
+            <td>기간/행사별 복잡한 수수료율을 시스템이 지원 못해 정산 시 엑셀 재계산</td>
+            <td><span class="highlight">유연한 수수료 설정 엔진</span> 구축 및 정산 모듈 실시간 데이터 연동</td>
+            <td>정산 오류 방지 및 결산 리드타임 단축</td>
+        </tr>
+
+        <!-- 3. 제품 및 작업지시 관리 -->
+        <tr>
+            <td rowspan="3" class="category">3. 제품 및<br>작업지시 관리</td>
+            <td align="center">품번/스펙 생성</td>
+            <td>기획/소싱 담당자가 원단, 시즌, 혼용률 등을 각각 개별적으로 수기 입력</td>
+            <td>마스터 데이터(브랜드, 시즌 등) 선택 시 <span class="highlight">연관 데이터(서브브랜드 등) 연쇄 자동 세팅</span></td>
+            <td>제품 정보 생성 시간 단축 및 데이터 표준화</td>
+        </tr>
+        <tr>
+            <td align="center">작업지시서</td>
+            <td>작업지시서 출력 시 원가 정보가 자동으로 매핑되지 않아 수기로 추가 기입</td>
+            <td><span class="highlight">작업지시서 출력 시 원가 정보 자동 출력</span>되도록 리포트 기능 개선</td>
+            <td>소싱 본부 및 협력업체 간 업무 효율성 증대</td>
+        </tr>
+        <tr>
+            <td align="center">프로세스 연결</td>
+            <td>가품번 등록과 실제 작업지시 등록이 파편화됨</td>
+            <td><span class="highlight">'기획(가품번) -> 소싱(협의) -> 작업지시 업데이트'</span> 파이프라인 전산화</td>
+            <td>부서 간 업무 현황 투명화 및 리드타임 단축</td>
+        </tr>
+
+        <!-- 4. 타 시스템 연동 -->
+        <tr>
+            <td rowspan="2" class="category">4. 타 시스템 연동</td>
+            <td align="center">온라인몰 연동</td>
+            <td>굿웨어몰 연동 시 사업부별 작업 방식이 다르고 수기 입력이 잦음</td>
+            <td><span class="highlight">온라인 전용 필드(카테고리, 한글제품명 등) 표준화 및 자동 연동 확대</span></td>
+            <td>온라인몰 상품 등록 시간 단축 및 정보 불일치 해소</td>
+        </tr>
+        <tr>
+            <td align="center">내부 시스템 연동</td>
+            <td>타 시스템(S-ONE 등)에서 목표원가, 생산지 등 데이터 변경 시 FA-ONE에 수기 업데이트 필요</td>
+            <td><span class="highlight">S-ONE 등 유관 시스템 데이터 변경 시 FA-ONE 자동 동기화</span></td>
+            <td>부서 간 데이터 이중 관리 방지 및 실시간 데이터 정합성 유지</td>
+        </tr>
+
+        <!-- 5. 재고 수불 관리 -->
+        <tr>
+            <td rowspan="2" class="category">5. 재고 수불 관리</td>
+            <td align="center">거점-종속 수불</td>
+            <td>중간관리 매장 간 이동 시 가상 창고(X, OA 등) 활용 수기 입력, 실시간 추적 불가</td>
+            <td>시스템 내 <span class="highlight">Hub-Spoke 관계 정의 및 실시간 트랜잭션 관리</span>, '이동 중 재고' 위치 추적</td>
+            <td>재고 로스 책임 소재 명확화 및 월말 매출 배분 공수 절감</td>
+        </tr>
+        <tr>
+            <td align="center">자가소모 처리</td>
+            <td>매장 자가소모 시 반드시 물류센터 반품 후 처리해야 하는 구조적 제약</td>
+            <td>매장에서 <span class="highlight">직접 자가소모 등록 및 회계 전표 자동 연동</span></td>
+            <td>물류 물동량 감소 및 현장 업무 신속성 확보</td>
+        </tr>
+
+        <!-- 6. 영업 정산 관리 -->
+        <tr>
+            <td rowspan="3" class="category">6. 영업 정산 관리</td>
+            <td align="center">매출 확정</td>
+            <td>유통망 매출 엑셀 다운로드/재가공/업로드 및 입금 내역 수기 대조</td>
+            <td>EDI/API 연동을 통한 <span class="highlight">'3-Way 자동 매칭 엔진'</span> 도입 (ERP vs 유통망 vs VAN)</td>
+            <td>정산 업무 시간 80% 단축 및 오입력 차단</td>
+        </tr>
+        <tr>
+            <td align="center">리스크 관리</td>
+            <td>사후 보고서 중심의 채권 관리, 미수 발생 시 즉각적인 대응 체계 부재</td>
+            <td>가상계좌 실시간 연동 및 <span class="highlight">임계치 초과 미수 시 시스템 즉시 팝업 알림</span></td>
+            <td>현금 사고 예방 및 채권 회수율 제고</td>
+        </tr>
+        <tr>
+            <td align="center">증빙 자동화</td>
+            <td>정산 확정 후 세금계산서 발행을 위해 데이터를 다시 수기로 입력(Trustbill)</td>
+            <td>정산 확정 시 <span class="highlight">Trustbill API 연동 전자세금계산서 자동 역발행</span></td>
+            <td>중복 업무 제거 및 발행 오류 원천 차단</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

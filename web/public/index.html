@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>신성통상 IT 기획팀 WIKI</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">IT</div>
+          <div class="brand-text">
+            <strong>신성통상 IT 기획팀 <span class="brand-wiki">WIKI</span></strong>
+            <span>자료를 편하게 찾는 곳</span>
+          </div>
+          <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-expanded="true" title="왼쪽 메뉴 접기" aria-label="왼쪽 메뉴 접기">‹</button>
+        </div>
+
+        <nav class="nav" aria-label="주요 화면">
+          <button class="nav-item active" data-view="dashboard" title="홈"><span class="nav-label">홈</span><span class="nav-short">홈</span></button>
+          <button class="nav-item" data-view="wiki" title="요약 보기"><span class="nav-label">요약 보기</span><span class="nav-short">요약</span></button>
+          <button class="nav-item" data-view="nfsm" title="NFSM 프로젝트 WIKI"><span class="nav-label">NFSM 프로젝트 WIKI</span><span class="nav-short">NFSM</span></button>
+          <button class="nav-item" data-view="registry" title="원본 찾기"><span class="nav-label">원본 찾기</span><span class="nav-short">원본</span></button>
+          <button class="nav-item" data-view="graph" title="연결 보기"><span class="nav-label">연결 보기</span><span class="nav-short">연결</span></button>
+        </nav>
+
+        <div class="sidebar-guide">
+          <strong>이렇게 써보세요</strong>
+          <span>궁금한 키워드 검색 → 요약 읽기 → 원본 확인</span>
+        </div>
+
+        <div class="sidebar-foot">
+          <span id="serviceState">준비됨</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="hero" aria-labelledby="heroTitle">
+          <div class="hero-copy">
+            <p class="eyebrow">신성통상 자료를 편하게 탐색하는 공간</p>
+            <h1 id="heroTitle">필요한 자료를 빠르게 찾고, 맥락까지 이어서 봅니다</h1>
+            <p>
+              흩어진 raw 자료를 읽기 쉬운 요약과 연결된 인사이트로 정리했습니다. 키워드로 찾고, 요약으로 파악하고, 필요할 때 원본을 바로 열어보세요.
+            </p>
+          </div>
+          <div class="hero-visual" aria-label="신성통상 IT 기획팀 WIKI 운영 흐름">
+            <div class="flow-node raw">찾기</div>
+            <div class="flow-line"></div>
+            <div class="flow-node queue">읽기</div>
+            <div class="flow-line"></div>
+            <div class="flow-node wiki">연결</div>
+            <div class="flow-metrics">
+              <span><b id="metricResources">0</b> 자료</span>
+              <span><b id="metricPages">0</b> 요약</span>
+              <span><b id="metricPending">0</b> 연결</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="dashboardView" class="view active">
+          <div class="toolbar">
+            <div>
+              <h2>오늘 볼 자료</h2>
+              <p class="view-note">추천 자료와 검색을 통해 필요한 맥락을 빠르게 찾아봅니다.</p>
+            </div>
+            <div class="searchbox">
+              <label for="globalSearch">무엇을 찾고 있나요?</label>
+              <input id="globalSearch" type="search" placeholder="예: WMS, PLM, 정산" />
+            </div>
+          </div>
+
+          <div class="stats-grid" id="statsGrid"></div>
+
+          <div class="two-col">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>먼저 보면 좋은 자료</h3>
+                  <p class="panel-note">지금 흐름을 잡는 데 도움이 되는 요약과 원본입니다.</p>
+                </div>
+                <button class="collapse-toggle" type="button" data-target="focusList" aria-expanded="false" aria-controls="focusList">펼치기</button>
+              </div>
+              <div id="focusList" class="link-list collapsible-content collapsed"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>자료의 맥락</h3>
+                  <p class="panel-note">함께 보면 이해가 쉬워지는 개념과 질문입니다.</p>
+                </div>
+                <button class="collapse-toggle" type="button" data-target="recentLog" aria-expanded="false" aria-controls="recentLog">펼치기</button>
+              </div>
+              <div id="recentLog" class="log-list collapsible-content collapsed"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>찾아본 결과</h3>
+                <p class="panel-note">검색어를 입력하면 관련 요약과 원본만 추려 보여줍니다.</p>
+              </div>
+              <div class="panel-actions">
+                <span id="searchMeta">검색 전</span>
+                <button class="collapse-toggle" type="button" data-target="searchResults" aria-expanded="false" aria-controls="searchResults">펼치기</button>
+              </div>
+            </div>
+            <div id="searchResults" class="result-list collapsible-content collapsed"></div>
+          </section>
+        </section>
+
+        <section id="wikiView" class="view">
+          <div class="split">
+            <section id="wikiListPanel" class="panel list-panel">
+              <div class="panel-head">
+                <div>
+                  <h2>문서 요약</h2>
+                  <p class="panel-note">원본을 해석해 만든 요약, 개념, 질문 문서를 탐색합니다.</p>
+                </div>
+              </div>
+              <div class="filter-row">
+                <select id="typeFilter" aria-label="페이지 유형"></select>
+                <input id="pageFilter" type="search" placeholder="페이지 필터" />
+              </div>
+              <div id="pageList" class="page-list"></div>
+            </section>
+
+            <button id="wikiListToggle" class="split-toggle" type="button" aria-expanded="true" aria-controls="wikiListPanel" title="문서 목록 접기" aria-label="문서 목록 접기">
+              <span class="split-toggle-icon">‹</span>
+              <span class="split-toggle-label">목록</span>
+            </button>
+
+            <article class="panel document-panel">
+              <div class="panel-head">
+                <div>
+                  <h2 id="docTitle">페이지를 선택하세요</h2>
+                  <span id="docPath"></span>
+                </div>
+                <div class="doc-actions">
+                  <button id="rawFileLink" class="mini-link raw-file-link" type="button">로컬 파일 열기</button>
+                  <a id="obsidianLink" class="mini-link" href="#" target="_blank" rel="noreferrer">Obsidian에서 열기</a>
+                </div>
+              </div>
+              <div id="docBody" class="markdown"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="nfsmView" class="view">
+          <div class="project-layout">
+            <section class="panel project-list-panel">
+              <div class="panel-head">
+                <div>
+                  <h2>NFSM 프로젝트 WIKI</h2>
+                  <p class="panel-note">신성통상 차세대 패션관리시스템 개발 vault의 문서를 함께 봅니다.</p>
+                </div>
+                <div class="panel-actions">
+                  <button id="refreshNfsmVault" class="mini-link" type="button">새로고침</button>
+                  <button id="openNfsmVault" class="mini-link" type="button">폴더 열기</button>
+                </div>
+              </div>
+              <div class="filter-row">
+                <input id="nfsmFilter" type="search" placeholder="프로젝트 문서 검색" />
+              </div>
+              <div id="nfsmMeta" class="vault-meta">불러오는 중</div>
+              <div id="nfsmList" class="page-list"></div>
+            </section>
+
+            <article class="panel document-panel">
+              <div class="panel-head">
+                <div>
+                  <h2 id="nfsmTitle">프로젝트 문서를 선택하세요</h2>
+                  <span id="nfsmPath"></span>
+                </div>
+                <div class="doc-actions">
+                  <button id="openNfsmFile" class="mini-link" type="button">파일 열기</button>
+                  <a id="nfsmObsidianLink" class="mini-link" href="#" target="_blank" rel="noreferrer">Obsidian에서 열기</a>
+                </div>
+              </div>
+              <div id="nfsmBody" class="markdown"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="registryView" class="view">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>원본 자료</h2>
+                <p class="panel-note">등록된 raw 자료를 검색하고 로컬 파일로 바로 엽니다.</p>
+              </div>
+              <input id="resourceFilter" class="compact-search" type="search" placeholder="자료명, 경로, 확장자 검색" />
+            </div>
+            <div id="registryTable" class="resource-grid"></div>
+          </section>
+        </section>
+
+        <section id="graphView" class="view">
+          <section class="panel graph-panel">
+            <div class="panel-head">
+              <div>
+                <h2>인사이트 연결망</h2>
+                <p class="panel-note">핵심 노드만 추려 보여주고, 마우스를 올리면 관련 연결과 주변 라벨을 강조합니다.</p>
+              </div>
+              <span id="graphMeta"></span>
+            </div>
+            <div id="graphLegend" class="graph-legend" aria-label="연결망 범례"></div>
+            <canvas id="graphCanvas" width="1200" height="580"></canvas>
+          </section>
+        </section>
+
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1004 @@
+
+--- Slide 1 ---
+온라인정산프로세스
+패션 시스템 INTERFACE
+
+--- Slide 2 ---
+1. 온라인(자사/외부) 출고
+자사/외부 몰 고객 주문에 대하여 판매점으로 출고 하고 외부 몰에 대하여 판매 실적 생성.
+자사 몰은 출고 실적만 생성 하고 자사 몰 판매는 자사 몰 판매실적 생성시 판매실적 생성.
+제휴몰 출고
+출고실적 시작
+인터페이스
+상태변경
+온라인출고
+T_GWM_RNDS_OUTB
+유효성
+체크
+브랜드마감
+매장브랜드, 폐점여부,
+매장할인마진율
+: 출고매장, 판매매장
+제품유효성
+SP_GWM_RNDS_OUTB
+YES
+NO
+매장재고
+T_SHOP_STOCK
+창고재고
+T_WH_STOCK_PRDT
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+대상 : SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS : S  R 갱신
+대상 : SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS = R
+조회
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+자동판매
+여부 = Y
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+판매결재
+T_SALE_STLM
+NO
+자동판매 여부
+MALL_CD = MCOM  N (자사몰)
+MALL_CD != MCOM  N(제휴몰)
+결재구분 :
+현금(비승인)
+거래명세서
+T_TRAN_SPEC
+온라인출고
+T_GWM_RNDS_OUTB
+출고반품 : 출고지 매장(STS027)  창고(OA) 반품
+출고: 창고(OA)  판매처 출고
+창고(OA)  판매 매장 출고
+판매수불ID
+출고수불ID
+출고반품수불ID
+인터페이스 상태 UPDATE
+IF_STS : S  F
+수량이 0인 대상은 오류 처리
+
+--- Slide 3 ---
+2. 온라인 출고 반품(자사/외부)
+WMS 입고 검수(가 입고, 가 확정)에 대한 판매 반품, WMS 매장 출고 실적 생성.
+자사/외부 몰 출고 반품을 등록. 출고 반품 발생시 창고(OA)에서 출고지 매장(WMS 센터 매장 : STS027)로 출고 처리를 한다.
+자사/외부몰 반품
+반품 시작
+인터페이스
+상태변경
+온라인출고반품
+T_GWM_RNDS_RETURN
+유효성
+체크
+SP_GWM_RNDS_RETURN
+대상 : WH_SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS : S  R 갱신
+YES
+NO
+매장수불
+T_SHOP_RNDS_BASE
+거래명세서
+T_TRAN_SPEC
+매장재고
+T_SHOP_STOCK
+창고재고
+T_WH_STOCK_PRDT
+제품월수불
+T_M_RNDS
+온라인출고반품
+T_GWM_RNDS_RETURN
+인터페이스
+상태변경
+패션ERP 야간배치 갱신
+브랜드마감
+매장브랜드, 폐점여부,
+출고지할인마진율
+제품유효성
+대상 : WH_SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS : S  F 갱신
+출고수불ID UPDATE
+대상 : WH_SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS = R
+조회
+창고(OA)  WMS센터 매장ID(STS027) 출고
+: 공급단가, 공급금액, 부가세, 금액은 모두 0으로 처리
+: 수량만 창고에서 출고지 매장으로 이동
+출고
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+
+--- Slide 4 ---
+3. 자사몰 판매
+자사몰 판매/판매 반품은 결제/구매확정 으로 판매 실적 생성.
+구매 확정시 결제 기준 판매 실적 삭제 후 구매 확정 기준으로 판매 실적 재 생성
+자사몰 판매
+판매실적 시작
+SP_GWM_SALE_SHOP_RNDS
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+구매확정
+여부
+매장수불
+T_SHOP_RNDS_BASE
+매장 : STS015
+대상 : 판매(C20922)
+ATTR1 : ‘GWM_STLM%’
+ATTR13 ='굿웨어몰구매확정기준'
+YES
+NO
+조회일자변경
+매월 1 ~ 현재일자
+조회일자
+입력Parameter
+-> BO 통계 테이블
+STT_SALES_ORD_CLM_GOD_MDAT_HM
+굿웨어몰 판매수불용
+T_GWM_SALE_SHOP_RNDS
+CLM_NO
+IS NLL OR
+CLM_NO = ‘ ‘
+YES
+NO
+PAY_DT = 조회일자
+CLM_COMPT_DT= 조회일자
+조회
+주문번호, 주문상품순번, 주문클레임상품순번 대상 UPDATE/INSERT
+유효성
+체크
+대상 : 판매, 클레임(취소, 교환, 교환반품)
+ORD_CHNNL_CD IN ('UNITY_MALL','CLUB_MALL')
+ 통합몰, 클럽몰
+SHOP_RNDS_ID IS NULL,
+SHOP_ID = ‘STS015’
+브랜드마감
+매장브랜드, 폐점여부,
+매장할인마진율
+공급가계산
+YES
+NO
+SP_CAL_SALE_SPPR_MNG
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+판매결재
+T_SALE_STLM
+굿웨어몰 판매수불용
+T_GWM_SALE_SHOP_RNDS
+판매수불ID UPDATE
+결재시점 데이터
+클레임발생시점데이터
+패션ERP 야간배치 갱신
+조회
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+구매확정건수 > 0
+(주문,클레임 매출)
+1시간 배치
+
+--- Slide 5 ---
+4. 온라인 판매 반품(자사/외부)
+자사/외부 몰 매장반품 등록을 관리.  자사 몰은 매장 출고반품 실적만 발생하고 외부 몰은 출고반품/판매반품 실적이 발생.
+자사/제휴몰 반품
+반품실적 시작
+인터페이스
+상태변경
+온라인판매반품
+T_GWM_RNDS_REFUND
+유효성
+체크
+브랜드마감
+매장브랜드, 폐점여부,
+매장할인마진율
+: 출고매장, 판매매장
+제품유효성
+SP_GWM_RNDS_REFUND
+YES
+NO
+매장재고
+T_SHOP_STOCK
+창고재고
+T_WH_STOCK_PRDT
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+대상 : SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS : S  R 갱신
+대상 : SHOP_RNDS_ID IS NULL
+GRP_CD = ‘MCOM’
+IF_STS = R
+조회
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+자사몰
+여부
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+판매결재
+T_SALE_STLM
+NO
+MALL_CD : MCOM
+자사몰
+결재구분 :
+현금(비승인)
+거래명세서
+T_TRAN_SPEC
+온라인판매반품
+T_GWM_RNDS_REFUND
+출고반품 : 판매 매장ID  창고(OA) 반품
+출고: 창고(OA)  출고지 매장ID(STS027) 출고
+창고(OA)  출고지 매장ID(STS027) 출고 수량은 0
+판매반품수불ID
+출고반품수불ID
+출고수불ID
+인터페이스 상태 UPDATE
+IF_STS : S  F
+
+--- Slide 6 ---
+5. 자사 몰 구매 확정
+구매 확정은 자사 몰에서 발생 하고 구매 확정시 결제 기준 판매 실적 삭제  구매 확정 기준 판매 실적 재 생성.
+자사몰구매확정
+자사몰
+구매확정 시작
+전월 판매수불
+삭제처리(UPDATE)
+매장수불
+T_SHOP_RNDS_BASE
+SP_GWM_SALE_SHOP_RNDS_CONFIRM
+대상 : 전월판매데이터
+SHOP_ID = ‘STS015’
+ATTR1 = GWM_SALE
+ATTR13 = 굿웨어몰결재기준
+DEL_DAY  시스템일자
+DEL_USERID  SYSTEM(GWM)
+조회
+대상 : SHOP_ID = ‘STS015’
+SHOP_RNDS_ID IS NULL
+STLM_YYMM = SYSTEM 전월
+유효성
+체크
+브랜드마감
+매장브랜드, 폐점여부,
+할인마진율
+제품유효성
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+YES
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+판매결재
+T_SALE_STLM
+자사몰 구매확정 I/F테이블
+(굿웨어몰BO)
+T_GWM_IF_CAL_ORD_CLM_GOD
+판매수불ID갱신
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+결재구분 :
+현금(비승인)
+
+--- Slide 7 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+제휴몰정산
+제휴몰정산 시작
+SP_ONLINE_STLM_BASE
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+온라인정산기본
+T_ONLINE_STLM_BASE
+마감
+여부
+YES
+종료
+작업구분
+DELETE
+여부
+NO
+YES
+삭제일자 UPDATE
+EC
+(온라인구시스템)
+TEMP_INS
+엑셀업로드
+작업구분
+MAPP
+여부
+NO
+조회 건수 < 1
+YES
+조회
+검색조건 : 정산년월, 상위브랜드
+MALL_ID, 정산매장, DEL_DAY IS NULL
+온라인정산기본
+T_ONLINE_STLM_BASE
+YES
+인터페이스정산기본
+T_GWM_IF_STLM_BASE
+데이터 INSERT
+대상제휴몰 :옥션, 카카오톡스토어,
+무신사, 11번가, 쿠팡, 하프클럽(신),
+위메프(신),스마트스토어,G마켓,29CM
+제휴몰의 최종차수(MAX(NO))
+NO
+공통코드
+T_COMN_CD
+데이터 MERGE
+ATTR1 NSERT
+(C59701:정산내역업로드)
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+정산년월, MALL_ID,
+브랜드, 매장,
+작업구분(C59701)
+진행현황 관리
+??
+OM_ORDER@EDW_EC
+온라인정산기본
+T_ONLINE_STLM_BASE
+데이터 UPDATE
+조회
+상품별주문번호,주문일자, 쇼핑몰아이디, 제품,칼라,사이즈,주문수량, 패키/배송완료일시, 주문금액/물류출고매장
+작업구분
+MAPP2
+여부
+NO
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+조회
+검색조건 : 정산년월, 상위브랜드
+MALL_ID, 정산매장, DEL_DAY IS NULL
+WORK_CLSBY = ‘C59702’
+YES
+조회 건수 < 1
+YES
+종료
+NO
+매장수불
+T_SHOP_RNDS_BASE
+조회
+수불ID, ATT10,
+ATTR2, 실판매금액
+매장
+NO
+작업구분
+MAPP3
+처리
+작업구분
+MAPP3
+여부
+YES
+작업구분
+정산처리
+처리
+NO
+정산년월, 상위브랜드
+MALL_ID, 정산매장
+조회
+EC(온라인 구 시스템) 으로 연동한 주문의 정산서 업로드 시 사용
+
+--- Slide 8 ---
+온라인정산기본
+T_ONLINE_STLM_BASE
+미배칭 주문I/F
+T_GWM_IF_STLM_BASE_MISS
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+작업구분
+MAPP3
+시작
+작업구분
+MAPP3
+처리
+EC
+(온라인구시스템)
+TEMP_INS
+조회 건수 != 0
+조회
+검색조건 : 정산년월, 상위브랜드
+MALL_ID, 정산매장, DEL_DAY IS NULL
+WORK_CLSBY = ‘C59705’(미정산주문판매)
+YES
+종료
+NO
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+스마트스토어 제외
+조회
+이월건 조회
+(확정데이터포함건)
+이월건 조회
+(MISS데이터포함건)
+온라인정산기본
+T_ONLINE_STLM_BASE
+공통 테이블 : 제품정보, 매장정보,매장브랜드, 브랜드
+매장수불
+T_SHOP_RNDS_BASE
+미배칭 주문I/F
+T_GWM_IF_STLM_BASE_MISS
+인터페이스정산기분
+T_GWM_IF_STLM_BASE
+온라인정산기본
+T_ONLINE_STLM_BASE
+매장수불
+T_SHOP_RNDS_BASE
+인터페이스정산기분
+T_GWM_IF_STLM_BASE
+매장수불
+T_SHOP_RNDS_BASE
+기타건 조회
+온라인 구 시스템
+OM_ORDER@EDW_EC
+온라인정산기본
+T_ONLINE_STLM_BASE
+매장수불
+T_SHOP_RNDS_BASE
+데이터 INSERT
+온라인정산기본
+T_ONLINE_STLM_BASE
+검색조건 : 정산년월, 상위브랜드, MALL_ID, 정산매장
+매장수불 판매, ATTR13 ( 'GWM_RNDS_OUTB' ,'GWM_RNDS_REFUND')
+T_GWM_IF_STLM_BASE_MISS  최종정산차수
+T_GWM_IF_STLM_BASE  최종정산차수
+기타건 조회
+매장수불  판매, ATTR1(EDIS_AUTO%)
+서비스 종료로 삭제 예정
+BO 주문(Y) 정산서(N)
+
+--- Slide 9 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+작업구분
+정산처리
+시작
+작업구분
+정산처리
+시작
+조회
+YES
+종료
+작업구분
+STLM1
+여부
+EC
+(온라인구시스템)
+TEMP_INS
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+ C59704(정산처리1)
+조회
+조회 건수 != 0
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+YES
+조회 건수 < 3
+NO
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+('C59701', 'C59702', 'C59703')
+정산업로드/품번매칭/판매매칭
+YES
+(정산금액 - 판매금액)
+!= 0
+NO
+YES
+유효성
+체크
+매장할인마진율
+NO
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+YES
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+판매수불ID갱신
+온라인정산기본
+T_ONLINE_STLM_BASE
+STLM_SALE_RNDS_ID
+STLM_PRCS_YN  ‘Y’
+END_YN  ‘Y’
+END_YYMM  정산년월
+UPDATE 처리
+END_YN  ‘Y’
+END_YYMM  정산년월
+온라인정산기본
+T_ONLINE_STLM_BASE
+조회
+검색항목 : 온라인정산일련번호
+정산금액, 판매금액, 제품코드, 칼라
+사이즈, 수량
+조회 조건 : 정산여부  N
+COVR_ON_STLM_BASE_ID  NULL
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+엑셀업로드
+정산 처리 유형 / 정산 완료 여부 / 정산으로 발생한 수불번호 등 처리 이력 관리
+
+--- Slide 10 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+작업구분
+정산처리
+시작
+작업구분
+정산처리
+시작
+조회
+YES
+종료
+작업구분
+STLM2
+여부
+EC
+(온라인구시스템)
+TEMP_INS
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+ C59706(정산처리2)
+조회
+조회 건수 != 0
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+YES
+조회 건수 < 1
+NO
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+C59705(미정산주문판매)
+YES
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+판매수불ID갱신
+온라인정산기본
+T_ONLINE_STLM_BASE
+STLM_SALE_RNDS_ID
+STLM_PRCS_YN  Y
+END_YN  N
+온라인정산기본
+T_ONLINE_STLM_BASE
+조회
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+엑셀업로드
+매장수불
+T_SHOP_RNDS_BASE
+검색항목 : 온라인정산일련번호
+실판매금액, 제품코드, 칼라
+사이즈, 수량
+조회 조건 : 정산여부  N
+STLM_PRCS_YN   N
+정산 처리 유형 / 정산 완료 여부 / 정산으로 발생한 수불번호 등 처리 이력 관리
+
+--- Slide 11 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+작업구분
+정산처리
+시작
+작업구분
+정산처리
+시작
+조회
+YES
+종료
+작업구분
+STLM3
+여부
+EC
+(온라인구시스템)
+TEMP_INS
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+ C59708(정산처리3)
+조회
+조회 건수 != 0
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+YES
+조회 건수 < 3
+NO
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+('C59701', 'C59702', 'C59703')
+정산업로드/품번매칭/판매매칭
+YES
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+판매수불ID갱신
+온라인정산기본
+T_ONLINE_STLM_BASE
+STLM_SALE_RNDS_ID
+매장, 판매금액, 판매수량
+END_YN  ‘Y’
+END_YYMM  정산년월
+이월주문정산일련번호
+UPDATE 처리
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+엑셀업로드
+조회
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+조회 항목 : ON_STLM_BASE_ID
+조회조건 : STLM_CLSBY  C59502(주문/판매)
+STLM_CMPL_CLSBY  C59602(미정산)
+STLM_CLSBY1  구매확정, 교환, 취소, 배송비제외
+온라인정산기본
+T_ONLINE_STLM_BASE
+매장수불
+T_SHOP_RNDS_BASE
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+유효성
+체크
+조회
+매장할인마진율
+NO
+YES
+판매 미
+매칭시작
+정산 처리 유형 / 정산 완료 여부 / 정산으로 발생한 수불번호 등 처리 이력 관리
+정산 처리 유형 / 정산 완료 여부 / 정산으로 발생한 수불번호 등 처리 이력 관리
+
+--- Slide 12 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+판매 미
+매칭시작
+판매 미
+매칭 시작
+온라인구시스템)
+TEMP_INS
+조회
+온라인정산기본
+T_ONLINE_STLM_BASE
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID,
+판매수불ID  NULL
+상품별주문번호  NOT NULL
+정산시업로드여부  N
+정산처리여부  N
+엑셀업로드
+유효성
+체크
+매장할인마진율
+종료
+YES
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+온라인정산이력
+T_ONLINE_STLM_PRCS_BASE
+판매수불ID갱신
+온라인정산기본
+T_ONLINE_STLM_BASE
+STLM_SALE_RNDS_ID
+STLM_PRCS_YN  Y
+END_YYMM  정산년월
+END_YN  N
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+정산 처리 유형 / 정산 완료 여부 / 정산으로 발생한 수불번호 등 처리 이력 관리
+
+--- Slide 13 ---
+6. 외부 몰 정산
+외부 몰 판매에 대한 정산 처리. 외부 몰 정산 LIST 수취 후 외부 몰 정산 수행.
+SP_ONLINE_STLM_BASE
+작업구분
+정산처리
+시작
+작업구분
+정산처리
+시작
+조회
+YES
+종료
+작업구분
+STLM4
+여부
+온라인구시스템)
+TEMP_INS
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+ C59709(정산처리4)
+조회
+조회 건수 != 0
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+YES
+조회 건수 < 3
+NO
+조회조건 : 정산년월, 정산매장
+상위브랜드, MALL_ID
+WORK_CLSBY
+('C59701', 'C59702', 'C59703')
+정산업로드/품번매칭/판매매칭
+YES
+NO
+공급가계산
+SP_CAL_SALE_SPPR_MNG
+판매
+채번생성
+Oracle 채번
+SHOP_RNDS_ID
+REG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+??
+T_ONLINE_STLM_PRCS_BASE
+판매수불ID갱신
+온라인정산기본
+T_ONLINE_STLM_BASE
+STLM_SALE_RNDS_ID
+STLM_PRCS_YN  Y
+END_YN  Y
+END_YYMM  정산년월
+이월주문정산일련번호
+UPDATE 처리
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+엑셀업로드
+조회
+조회 항목 : 온라인정산일련번호, 정산/판매금액
+제품, 칼라, 사이즈, 수량
+조회조건 : STLM_YN  Y
+STLM_PRCS_YN  N
+SALE_SHOP_RNDS_ID  NULL
+유효성
+체크
+매장할인마진율
+NO
+YES
+온라인정산기본
+T_ONLINE_STLM_BASE
+온라인정산진행체크
+T_ONLINE_STLM_CHECK
+공통코드
+T_COMN_CD
+ATTR1  STLM4 (C59709 미 매칭)
+데이터 MERGE
+조회
+
+--- Slide 14 ---
+7. LOSS 처리
+EC 연동 비활성화 재고 LOSS 처리(온라인 구 시스템(EC) 서비스 종료 후 삭제 예정).
+LOSS 처리
+LOSS 시작
+조회
+유효성
+체크
+브랜드마감
+NO
+YES
+출고
+채번생성
+Oracle 채번
+SHOP_RNDS_IDREG_NO
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+거래명세
+T_TRAN_SPEC
+출고수불ID갱신
+매장재고
+T_SHOP_STOCK
+SP_ONLINE_DEACT_LOSS
+입력 파리미터
+상위브랜드, 년월, LOSS구분
+LOSS일자, 사용자ID
+종료
+CD_KEY = LOSS구분
+ATTR3  LOSS
+유효성
+체크
+매장, 매장브랜드
+NO
+LOSS
+여부
+YES
+YES
+자가소모
+채번생성
+Oracle 채번
+WH_RNDS_ID
+REG_NO
+창고수불
+T_WH_RNDS_BASE
+자가소모
+T_SELF_CSUM
+비활성재고 등록
+EC.WH_STOCK_DEACT@EDW_EC
+RET_DELV_QTY
+NMAL_DELV_QTY
+STOCK_QTY 갱신
+SALE
+여부
+NO
+출고반품
+채번생성
+판매
+채번생성
+출고반품
+판매수불ID갱신
+YES
+출고/판매점관리
+OM_SHOP_MALL@EDW_EC
+Oracle 채번
+SHOP_RNDS_IDREG_NO
+OS 창고 자가소모
+
+--- Slide 15 ---
+7. LOSS 처리
+BO연동 비활성화 LOSS 재고 처리.
+LOSS 처리
+비활성재고
+LOSS 시작
+조회
+유효성
+체크
+브랜드마감
+NO
+YES
+매장수불
+T_SHOP_RNDS_BASE
+거래명세
+T_TRAN_SPEC
+자가소모수불ID갱신
+SP_ONLINE_DEACT_LOSS
+입력 파리미터
+상위브랜드, 년월, LOSS구분
+LOSS일자, 사용자ID
+종료
+CD_KEY = LOSS구분
+ATTR3  LOSS
+유효성
+체크
+매장, 매장브랜드
+NO
+LOSS
+여부
+YES
+YES
+자가소모
+채번생성
+Oracle 채번
+WH_RNDS_ID
+REG_NO
+창고수불
+T_WH_RNDS_BASE
+자가소모
+T_SELF_CSUM
+비활성재고
+T_GWM_RNDS_STOCK_DEACT
+SALE
+여부
+NO
+판매
+채번생성
+출고반품
+판매수불ID갱신
+YES
+Oracle 채번
+SHOP_RNDS_IDREG_NO
+출고반품
+채번생성
+Oracle 채번
+SHOP_RNDS_IDREG_NO
+판매
+T_SALE
+STS027 반품처리
+OA 창고 자가소모
+매장재고
+T_SHOP_STOCK
+제품월수불
+T_M_RNDS
+패션ERP 야간배치 갱신
+창고재고
+T_WH_STOCK_PRDT
+BO에서등록

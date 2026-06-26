@@ -1,0 +1,445 @@
+
+--- Slide 1 ---
+온라인 정산 AS-IS/TO-BE
+
+--- Slide 2 ---
+1. 온라인 출고
+자사/제휴몰
+주문
+주문정보수집
+(BO)
+WMS I/F 전송
+WMS 출고작업
+WMS
+출고실적I/F
+출고실적생성
+(BO)
+온라인출고I/F
+(BO)
+F-ONE
+출고 실적
+온라인출고
+T_GWM_RNDS_OUTB
+매장수불
+T_SHOP_RNDS_BASE
+AS-IS
+TO-BE
+출고
+T_TRAN_SPEC
+온라인출고
+T_ONLIE_DELV
+F-ONE
+출고 실적
+온라인 매장 출고
+STS027 매장 반품 출고
+F-ONE
+출고 실적
+거점 매장
+출고 반품
+온라인
+매장출고
+SP_GWM_RNDS_OUTB
+SP_IFT_ONLINE_DELV_RST
+B2C출고실적
+IFT_B2C_OUTB_RST
+SP_B2C_ONLINE_OUTB_RST
+온라인출고
+T_GWM_RNDS_OUTB
+거점출고
+거점매장
+반품 출고
+거점출고
+WH_SHOP_ID가 STS027 이외
+YES
+NO
+B2C출고실적
+IFT_B2C_OUTB_RST
+온라인출고
+T_GWM_RNDS_OUTB
+온라인출고
+T_GWM_RNDS_OUTB
+WMS 출고분 UPDATE
+클레임정보
+T_GWM_IF_CLM_IFO
+클레임정보
+T_GWM_IF_CLM_IFO
+거점출고
+YES
+온라인
+매장출고
+WMS 출고분 제외
+STS027 매장
+반품 출고
+창고
+(OA)
+온라인 매장
+출고
+거점 매장
+반품 출고
+창고
+(ON)
+온라인 매장
+출고
+거점 매장
+반품 출고
+
+--- Slide 3 ---
+2. 온라인 출고 반품
+반품정보수집
+(BO)
+WMS 반품I/F
+WMS
+반품검수
+출고반품생성
+(BO)
+AS-IS
+TO-BE
+WMS
+블라인드실적
+WMS
+반품등록
+WMS
+반품실적
+자사/제휴몰
+반품
+온라인출고
+반품I/F(BO)
+F-ONE
+출고 반품 실적
+온라인출고반품
+T_GWM_RNDS_RETURN
+매장수불
+T_SHOP_RNDS_BASE
+출고
+T_TRAN_SPEC
+온라인출고
+T_ONLIE_DELV
+온라인판매반품
+T_GWM_RNDS_REFUND
+블라인드주문매칭
+T_GWM_IF_RET_FAK_MATCH
+STS027 매장
+출고
+SP_GWM_RNDS_RETURN
+온라인출고반품
+T_GWM_RNDS_RETURN
+F-ONE
+출고 반품 실적
+반품 수량(금액 X)
+창고  매장출고(STS027)
+온라인판매반품
+T_GWM_RNDS_REFUND
+온라인매장
+출고 반품
+F-ONE
+출고 반품 실적
+창고
+(OA)
+STS027 매장출고
+SP_IFT_ONLINE_DELV_RST
+고객반품미예약
+(가입고(블라인드)
+고객반품예약
+(가확정)
+판매 반품I/F
+(BO)
+블라인드I/F
+(BO)
+SP_IFT_ONLINE_BLIND_STOR_SPEC
+블라인드주문매칭
+T_GWM_IF_RET_FAK_MATCH
+온라인매장
+출고반품
+온라인 매장
+출고 반품
+창고
+(ON)
+온라인출고반품
+T_GWM_RNDS_RETURN
+자사몰
+여부
+NO
+온라인매장
+출고반품
+STS027
+매장출고
+반품 금액(수량 X)
+창고  매장출고(STS027)
+온라인 매장
+출고 반품
+온라인블라인드입고
+T_ONLINE_BLIND_STOR
+
+--- Slide 4 ---
+3. 온라인 판매
+자사/제휴몰
+주문
+WMS
+출고실적I/F
+출고실적생성
+(BO)
+온라인출고I/F
+(BO)
+F-ONE
+판매실적
+온라인출고
+T_GWM_RNDS_OUTB
+매장수불
+T_SHOP_RNDS_BASE
+AS-IS
+TO-BE
+판매
+T_SALE
+F-ONE
+판매실적
+SP_IFT_ONLINE_SALE_RST
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+자사몰판매I/F
+(BO)
+온라인판매
+T_ONLIE_SALE
+SP_GWM_RNDS_OUTB
+온라인출고
+T_GWM_RNDS_OUTB
+온라인 매장
+판매(제휴)
+SP_GWM_SALE_SHOP_RNDS
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+온라인 매장
+판매(자사)
+F-ONE
+판매실적
+온라인출고
+T_GWM_RNDS_OUTB
+온라인 매장
+판매(제휴)
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+온라인 매장
+판매(자사)
+
+--- Slide 5 ---
+4. 온라인 판매 반품
+반품정보수집
+(BO)
+AS-IS
+TO-BE
+자사/제휴몰
+반품
+F-ONE
+반품 출고 실적
+온라인판매반품
+T_GWM_RNDS_REFUND
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+온라인판매
+T_ONLIE_SALE
+온라인매장
+판매반품(자사)
+SP_GWM_SALE_SHOP_RNDS
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+F-ONE
+반품 판매 실적
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+온라인매장
+출고반품
+F-ONE
+반품 판매 실적
+SP_IFT_ONLINE_SALE_RST
+판매반품I/F
+(BO)
+온라인판매반품
+T_GWM_RNDS_REFUND
+자사몰
+여부
+NO
+온라인매장
+판매반품(제휴)
+자사판매반품I/F
+(BO)
+자사몰판매
+T_GWM_SALE_SHOP_RNDS
+SP_GWM_RNDS_REFUND
+온라인판매반품
+T_GWM_RNDS_REFUND
+자사몰
+여부
+NO
+온라인매장
+판매반품(제휴)
+온라인매장
+출고반품(제휴)
+
+--- Slide 6 ---
+5. 블라인드 입고
+AS-IS
+TO-BE
+반품정보수집
+(BO)
+WMS 반품I/F
+WMS
+반품검수
+출고반품생성
+(BO)
+WMS
+블라인드실적
+WMS
+반품등록
+WMS
+반품실적
+자사/제휴몰
+반품
+온라인출고
+반품I/F(BO)
+F-ONE
+반품 출고 실적
+온라인출고반품
+T_GWM_RNDS_RETURN
+블라인드주문매칭
+T_GWM_IF_RET_FAK_MATCH
+온라인출고반품
+T_GWM_RNDS_RETURN
+SP_IFT_ONLINE_BLIND_STOR
+고객반품미예약
+(가입고(블라인드))
+고객반품예약
+블라인드I/F
+(BO)
+가입고
+여부
+YES
+온라인블라인드입고
+T_ONLINE_BLIND_STOR
+가입고 : REGISTER_NO (O)
+ORDER_ID (X)
+SP_IFT_ONLINE_BLIND_STOR_SPEC
+블라인드주문매칭
+T_GWM_IF_RET_FAK_MATCH
+온라인매장
+출고반품
+온라인블라인드입고
+T_ONLINE_BLIND_STOR
+블라인드주문미매칭
+T_GWM_IF_RET_FAK_
+MATCH_MISS
+블라인드 종결
+온라인블라인드입고
+T_ONLINE_BLIND_STOR
+블라인드주문미매칭
+T_GWM_IF_RET_FAK_
+MATCH_MISS
+가입고(블라인드) 입고시 플필먼트 관련 반품이 포함
+출고반품
+생성여부
+NO
+블라인드 종결
+YES
+
+--- Slide 7 ---
+5. 자사 몰 구매 확정 /제휴 몰 정산
+AS-IS
+TO-BE
+주문매칭
+(BO)
+제휴몰
+정산등록
+SP_IFT_ONLINE_SALE_STLM
+(제휴몰 정산/ 자사몰 구매확정)
+판매매칭
+(BO)
+주문미매칭
+수집(BO)
+온라인정산기본
+T_ONLINE_STLM_BASE
+온라인정산기본
+T_ONLINE_STLM_BASE
+1. 정산서 미 포함시 이월 등록
+- 마지막일자에 판매  판매반품
+- 익월 1일에 판매 재 등록
+2. BO 와 정산서 모두 존재
+2-1) 정산서 수량 X, 금액 O
+- 마지막 일자로 가품번 금액 등록
+2-2) 정산서 수량 O, 금액 불 일치
+- 판매일자 차이 금액 등록
+3. 주문번호가 없고 금액 존재
+- 마지막 일자에 가품번 금액 등록
+SP_ONLINE_STLM_BASE
+(제휴몰 정산)
+4 주문번호가 정산서 만 존재
+- 마지막 일자에 가품번 금액 등록
+매장수불
+T_SHOP_RNDS_BASE
+판매
+T_SALE
+F-ONE
+판매실적
+온라인정산기본
+T_ONLINE_STLM_BASE
+1. 정산서 미 포함시
+1) 주문번호, 주문순번의 금액 합이
+0 이면 최종 발생일자로 확정
+2) 그 외 SKIP
+2. 주문 판매내역, 정산서 매칭 O
+2-1) 주문금액 <> 정산금액
+1) 정산 월 이전 정산내역 X
+- 정산서 구매 확정일로 정산
+2) 정산 월 이전 정산내역 O
+- 정산금액 만 마지막 일자 구매
+확정
+2-2) 구매금액 = 정산금액
+1) 정산 월 이전 정산내역 X
+- 정산일자로 구매 확정
+2) 정산 월 이전 정산내역 O
+- 구매 확정 SKIP(종결)
+3. 주문 판매내역, 정산서 매칭 X
+3-1) 주문금액 <> 정산금액
+- 마지막 일자로 가품번 금액 등록
+3-2) 주문금액 = 정산금액
+- 구매 확정 SKIP(종결)
+4 주문번호 X OR 정산 수량 = 0
+4-1) 매장별 정산금액 합 != 0
+- 마지막일자에 가품번 금액 등록
+4-2) 매장별 정산금액 합 = 0
+- 구매 확정 SKIP(종결)
+온라인판매
+T_ONLIE_SALE
+F-ONE
+반품 판매 실적
+자사몰
+구매확정
+자사몰 구매확정 I/F테이블
+(굿웨어몰BO)
+T_GWM_IF_CAL_ORD_CLM_GOD
+자사몰 구매확정 I/F테이블
+(굿웨어몰BO)
+T_GWM_IF_CAL_ORD_CLM_GOD
+SP_GWM_SALE_SHOP_RNDS_CONFIRM
+1. 매장수불 결제 기준 내역 삭제
+: DEL Flag 처리
+2 구매 확정 일자로 판매 재 생성
+자사몰 구매확정 I/F테이블
+(굿웨어몰BO)
+T_GWM_IF_CAL_ORD_CLM_GOD
+1. 주문 판매, 구매 확정 내역 매칭 O
+1) 주문 판매 수량 = 구매 확정 수량
+- 구매 확정일자로 주문 판매 항목
+으로 확정
+2) 주문 판매 수량 != 구매 확정 수량
+- 구매 확정 일자, 구매 확정 내역
+으로 확정
+2. 클레임 교환분의 선 판매 구매 확정
+1) 구매 확정 전 결제 기준으로 익월
+선 반영 될 수 있음.
+- 판매일자는 당월(20250205)
+구매확정은 전월(20250131)
+3. 구매 확정 내역 X, 부분/전체 취소,
+주문 판매 후 판매 반품 건
+- 해당 주문 발생 최종일로 확정
+3. 결제 기준 보다 구매 확정 선 발생
+- 마지막 일자로 주문, 구매 확정 등록

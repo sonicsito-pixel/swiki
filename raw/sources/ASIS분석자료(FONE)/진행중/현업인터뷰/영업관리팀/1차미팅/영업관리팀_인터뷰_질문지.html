@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>영업관리팀 심층 인터뷰 질문지</title>
+<style>
+    body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; margin: 40px; }
+    .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px; }
+    .header h1 { margin: 0; font-size: 24px; }
+    .header p { margin: 5px 0 0; color: #666; }
+    
+    .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    .meta-table td { border: 1px solid #ddd; padding: 10px; width: 25%; font-size: 13px; }
+    .meta-bg { background-color: #f9f9f9; font-weight: bold; }
+
+    .section { margin-bottom: 25px; page-break-inside: avoid; }
+    .section-title { background-color: #2c3e50; color: #fff; padding: 8px 15px; font-weight: bold; border-radius: 4px; margin-bottom: 15px; }
+    
+    .question-item { margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+    .q-text { font-weight: bold; color: #0056b3; margin-bottom: 5px; }
+    .q-desc { font-size: 13px; color: #666; font-style: italic; margin-left: 5px; }
+    
+    .memo-box { border: 1px solid #ccc; height: 60px; margin-top: 8px; background-color: #fff; width: 100%; }
+    
+    .pro-tip { background-color: #fff9db; border-left: 4px dotted #fab005; padding: 10px; font-size: 12px; margin-top: 20px; }
+    
+    @media print {
+        body { margin: 20px; }
+        .no-print { display: none; }
+        .section { border: 1px solid #eee; padding: 15px; border-radius: 8px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>[차세대 시스템(F-IT) 구축] 영업관리팀 심층 인터뷰 질문지</h1>
+    <p>목적: 매장 정보 관리 효율화 및 수기 업무 제거를 위한 요구사항 확정</p>
+</div>
+
+<table class="meta-table">
+    <tr>
+        <td class="meta-bg">인터뷰 일시</td>
+        <td>2026. 04. &nbsp;&nbsp;&nbsp; .</td>
+        <td class="meta-bg">장소</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="meta-bg">인터뷰 대상자</td>
+        <td>부서: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 성함: </td>
+        <td class="meta-bg">진행자</td>
+        <td></td>
+    </tr>
+</table>
+
+<!-- Section 1 -->
+<div class="section">
+    <div class="section-title">PART 1. 데이터 클렌징 및 관리 효율화</div>
+    
+    <div class="question-item">
+        <div class="q-text">Q1. 미사용 필드(34개 항목) 삭제 확답</div>
+        <div class="q-desc">사전 분석 결과 2018년 이후 미사용 항목들(우편번호, 중간관리자 상세 등)을 삭제해도 지장이 없습니까?</div>
+        <div class="memo-box"> (현업 의견: ) </div>
+    </div>
+
+    <div class="question-item">
+        <div class="q-text">Q2. 필수/선택 값 재정의</div>
+        <div class="q-desc">매장 등록 시 현재 "테스트"나 "000"으로 채우는 무의미한 강제 입력 필드가 있습니까?</div>
+        <div class="memo-box"></div>
+    </div>
+</div>
+
+<!-- Section 2 -->
+<div class="section">
+    <div class="section-title">PART 2. 매장 분류 체계 현실화 (엑셀 업무 내재화)</div>
+    
+    <div class="question-item">
+        <div class="q-text">Q3. 국내/해외 국가명 관리 도입</div>
+        <div class="q-desc">'과세/비과세'가 아닌 실제 '국가(Country)' 필드 신설 시 관리해야 할 특이 정보(통화 등)가 있습니까?</div>
+        <div class="memo-box"></div>
+    </div>
+
+    <div class="question-item">
+        <div class="q-text">Q4. 성인 / 키즈 / 복합 매장 분류</div>
+        <div class="q-desc">현재 엑셀로 따로 관리하는 이 분류 정보를 시스템 공식 필드로 넣을 때, 소급 적용이나 변경 주기가 빈번합니까?</div>
+        <div class="memo-box"></div>
+    </div>
+</div>
+
+<!-- Section 3 -->
+<div class="section">
+    <div class="section-title">PART 3. 코드 체계 및 부서 연동</div>
+    
+    <div class="question-item">
+        <div class="q-text">Q5. 매장코드와 회계용 부서코드 통합</div>
+        <div class="q-desc">1개 매장이 2개 이상의 회계 코드를 쓰는 예외 사례(샵인샵 등)가 존재합니까?</div>
+        <div class="memo-box"></div>
+    </div>
+
+    <div class="question-item">
+        <div class="q-text">Q6. 폐점 프로세스 데이터 처리</div>
+        <td class="q-desc">매장 폐점 시 사후 정산을 위해 부서코드를 일정 기간 유지해야 합니까?</td>
+        <div class="memo-box"></div>
+    </div>
+</div>
+
+<!-- Section 4 -->
+<div class="section">
+    <div class="section-title">PART 4. 입력 자동화 및 편의성</div>
+    
+    <div class="question-item">
+        <div class="q-text">Q7. 브랜드/유통망 선택 시 자동 세팅 항목</div>
+        <div class="q-desc">"브랜드"만 선택해도 자동으로 채워지길 원하는 항목은 무엇인가요? (사업부, MD 등)</div>
+        <div class="memo-box"></div>
+    </div>
+
+    <div class="question-item">
+        <div class="q-text">Q8. 조회 화면 및 엑셀 다운로드 개선</div>
+        <div class="q-desc">현재 조회 화면에서 가장 불편한 점(필드 배치, 다운로드 속도 등)은 무엇입니까?</div>
+        <div class="memo-box"></div>
+    </div>
+</div>
+
+<div class="pro-tip">
+    <strong>💡 인터뷰 팁:</strong> 현업이 "불편하다"고 하면, <strong>"지금 사용 중인 엑셀 파일"</strong>을 보여달라고 요청하세요. 그 파일의 열(Column)이 차세대 시스템의 필드가 됩니다.
+</div>
+
+<div style="text-align: center; margin-top: 30px;" class="no-print">
+    <button onclick="window.print()" style="padding: 10px 20px; cursor: pointer; background: #0056b3; color: white; border: none; border-radius: 4px;">🖨️ 이 질문지 인쇄하기</button>
+</div>
+
+</body>
+</html>

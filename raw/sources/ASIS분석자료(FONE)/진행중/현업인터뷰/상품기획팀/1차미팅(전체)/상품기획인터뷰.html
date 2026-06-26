@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차세대 패션관리 시스템 상품기획 업무 인터뷰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f1f5f9;
+            /* slightly darker for better contrast with white cards */
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            /* Prevent body scroll */
+        }
+
+        /* Slide Transitions */
+        .slide-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(5px);
+            height: 100%;
+        }
+
+        .slide-content.active {
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation Styling */
+        .nav-btn {
+            transition: all 0.2s ease;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn.step-active {
+            background-color: #2563eb;
+            color: white !important;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            border-color: #1d4ed8;
+            transform: scale(1.02);
+        }
+
+        .nav-btn.step-active .nav-num {
+            color: #93c5fd !important;
+            /* light blue */
+        }
+
+        .nav-btn.step-active i {
+            color: white !important;
+        }
+
+        /* Custom Scrollbar just in case of very small screens, though we aim for no scroll */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        /* Highlight specific text */
+        .text-highlight {
+            background: linear-gradient(120deg, #dbeafe 0%, #bfdbfe 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-6 flex flex-col h-screen overflow-hidden">
+    <!-- Top Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 z-50">
+        <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300" style="width: 16.66%;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="max-w-[1400px] mx-auto w-full mb-4 flex justify-between items-end shrink-0 pt-2">
+        <div>
+            <h1 class="text-3xl font-black text-slate-800 tracking-tight flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center shadow-md">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <span class="text-blue-600">FA-ONE</span> 시스템 상품기획 인터뷰
+            </h1>
+            <p class="text-sm font-semibold text-slate-500 mt-2 pl-11">수기 업무 최소화 및 시스템 데이터 기반 통합 관리 체계 구축</p>
+        </div>
+        <div class="text-right text-xs text-slate-400 hidden md:flex gap-4 items-center">
+            <span class="px-3 py-1 bg-slate-200 rounded-full text-slate-600 font-bold">IT기획팀</span>
+            <span class="font-mono">2026-04-29</span>
+        </div>
+    </header>
+
+    <main class="max-w-[1400px] mx-auto w-full flex flex-col md:flex-row gap-6 flex-1 min-h-0 pb-2">
+        <!-- Sidebar Navigation -->
+        <nav
+            class="w-full md:w-64 shrink-0 bg-white border border-slate-200 rounded-2xl flex flex-col overflow-hidden h-fit md:h-full shadow-sm">
+            <div class="p-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+                <h2 class="text-xs font-extrabold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="layout-list" class="w-4 h-4"></i> AGENDA
+                </h2>
+            </div>
+            <ul class="p-3 space-y-2 overflow-y-auto custom-scrollbar flex-1">
+                <li><button onclick="showSlide(0)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium step-active"
+                        id="nav-0">
+                        <span class="nav-num text-[11px] text-slate-400 font-mono font-bold w-4">01</span> 인터뷰
+                        목적</button></li>
+                <li><button onclick="showSlide(1)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium"
+                        id="nav-1">
+                        <span class="nav-num text-[11px] text-slate-400 font-mono font-bold w-4">02</span> 기준정보 체계
+                        확장</button></li>
+                <li><button onclick="showSlide(2)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium"
+                        id="nav-2">
+                        <span class="nav-num text-[11px] text-slate-400 font-mono font-bold w-4">03</span> 제품정보 및
+                        작지</button></li>
+                <li><button onclick="showSlide(3)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium"
+                        id="nav-3">
+                        <span class="nav-num text-[11px] text-slate-400 font-mono font-bold w-4">04</span> 입고 및 분할
+                        일정</button></li>
+                <li><button onclick="showSlide(4)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium"
+                        id="nav-4">
+                        <span class="nav-num text-[11px] text-slate-400 font-mono font-bold w-4">05</span> FONE-SONE
+                        연계</button></li>
+
+                <!-- Divider for final Q&A -->
+                <li class="pt-2 mt-2 border-t border-slate-100">
+                    <button onclick="showSlide(5)"
+                        class="nav-btn w-full text-left px-4 py-3.5 rounded-xl hover:bg-slate-50 text-sm text-slate-600 flex items-center gap-3 font-medium"
+                        id="nav-5">
+                        <i data-lucide="message-square" class="w-4 h-4 text-slate-400"></i> 질의 사항 (종합)</button>
+                </li>
+            </ul>
+            <div class="p-4 bg-blue-50 text-xs font-bold text-blue-700 border-t border-blue-100">
+                <i data-lucide="info" class="w-4 h-4 inline mr-1 -mt-0.5"></i> 질의응답은 마지막에 진행
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div
+            class="flex-1 bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-sm relative">
+            <div class="flex-1 p-8 lg:p-10 custom-scrollbar overflow-y-auto">
+
+                <!-- Slide 0: Goals -->
+                <section id="slide-0" class="slide-content active">
+                    <div class="mb-6 shrink-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span
+                                class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-black tracking-widest rounded-md">MISSION</span>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900 leading-tight">
+                            상품기획 내 수기 업무를 <br><span class="text-blue-600">시스템 데이터 기반</span>으로 통합 관리
+                        </h2>
+                        <p class="text-slate-500 text-base mt-4 font-medium">차세대 FA-ONE 프로젝트는 기획 업무의 <span
+                                class="text-slate-800 font-bold">'디지털 전환'</span>을 통해 4가지 핵심 과제를 달성합니다.</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-5 flex-1 min-h-0">
+                        <div
+                            class="p-6 border-2 border-slate-100 bg-slate-50/50 rounded-2xl flex flex-col justify-center transition-all hover:border-blue-200 hover:bg-white">
+                            <div
+                                class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="database" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-2">1. 데이터 통합</h4>
+                            <p class="text-slate-600 text-sm font-medium">개별 엑셀로 파편화된 상품 속성을 시스템 마스터 데이터로 흡수</p>
+                        </div>
+                        <div
+                            class="p-6 border-2 border-slate-100 bg-slate-50/50 rounded-2xl flex flex-col justify-center transition-all hover:border-indigo-200 hover:bg-white">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="history" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-2">2. 이력 정합성</h4>
+                            <p class="text-slate-600 text-sm font-medium">샘플부터 메인 생산까지 작업지시서 정보의 누락 없는 연속성 확보</p>
+                        </div>
+                        <div
+                            class="p-6 border-2 border-slate-100 bg-slate-50/50 rounded-2xl flex flex-col justify-center transition-all hover:border-emerald-200 hover:bg-white">
+                            <div
+                                class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="eye" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-2">3. 가시성 확보</h4>
+                            <p class="text-slate-600 text-sm font-medium">수기 관리 중인 스케줄을 가시화하여 유관 부서 간 정보 비대칭 해소</p>
+                        </div>
+                        <div
+                            class="p-6 border-2 border-slate-100 bg-slate-50/50 rounded-2xl flex flex-col justify-center transition-all hover:border-amber-200 hover:bg-white">
+                            <div
+                                class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-2">4. 업무 자동화</h4>
+                            <p class="text-slate-600 text-sm font-medium">단순 재입력 반복을 없애고 MD의 본연 기획 업무에 집중도 향상</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 1: Master Data -->
+                <section id="slide-1" class="slide-content">
+                    <div class="mb-6 shrink-0 flex justify-between items-end border-b-2 border-slate-100 pb-4">
+                        <div>
+                            <span
+                                class="inline-block text-blue-500 text-xs font-black tracking-widest uppercase mb-2">핵심
+                                과제 01</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <i data-lucide="layers" class="text-blue-600 w-8 h-8"></i> 기준정보(Master Data) 체계 확장
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-5 flex-1 min-h-0">
+                        <div class="col-span-3 p-6 border-2 border-blue-100 bg-blue-50/30 rounded-2xl">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shrink-0">
+                                    <i data-lucide="hash"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-extrabold text-slate-800 mb-2">브랜드 및 시즌 코드 한계 돌파</h3>
+                                    <p class="text-sm font-medium text-slate-600 mb-3">영문 2자리 제한을 탈피하여 영문 + 숫자 조합 등
+                                        <span class="text-highlight">유연한 신규 체계 도입</span>
+                                    </p>
+                                    <div
+                                        class="bg-white px-4 py-3 rounded-lg text-sm text-slate-700 border border-slate-200 shadow-sm leading-relaxed">
+                                        <span
+                                            class="group relative inline-block cursor-help text-blue-600 font-bold border-b-2 border-dashed border-blue-300">
+                                            캡슐
+                                            <div
+                                                class="pointer-events-none absolute bottom-full left-0 mb-2 w-72 opacity-0 transition-opacity group-hover:opacity-100 z-50">
+                                                <div
+                                                    class="bg-slate-800 text-white rounded-xl p-4 shadow-xl leading-normal text-left">
+                                                    <div class="font-extrabold mb-1 text-blue-300 text-base">캡슐
+                                                        (Capsule)</div>
+                                                    <div class="mb-2 text-slate-200 font-medium">하나의 컨셉으로 구성된 소규모 컬렉션
+                                                    </div>
+                                                    <div class="text-slate-400 text-xs">→ 시즌 내에서 스타일을 묶는 기획 단위</div>
+                                                </div>
+                                                <div
+                                                    class="absolute left-4 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800">
+                                                </div>
+                                            </div>
+                                        </span>,
+                                        <span
+                                            class="group relative inline-block cursor-help text-emerald-600 font-bold border-b-2 border-dashed border-emerald-300">
+                                            드롭
+                                            <div
+                                                class="pointer-events-none absolute bottom-full left-0 mb-2 w-72 opacity-0 transition-opacity group-hover:opacity-100 z-50">
+                                                <div
+                                                    class="bg-slate-800 text-white rounded-xl p-4 shadow-xl leading-normal text-left">
+                                                    <div class="font-extrabold mb-1 text-emerald-300 text-base">드롭
+                                                        (Drop)</div>
+                                                    <div class="mb-2 text-slate-200 font-medium">특정 시점에 맞춰 상품을 출시하는 방식
+                                                    </div>
+                                                    <div class="text-slate-400 text-xs">→ 일정·채널·수량을 통제하는 출시 전략</div>
+                                                </div>
+                                                <div
+                                                    class="absolute left-4 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-slate-800">
+                                                </div>
+                                            </div>
+                                        </span> 등 시즌에 구애받지 않는 스팟성 이벤트 대응 구조
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-span-3 grid grid-cols-2 gap-5 h-full">
+                            <div class="p-6 border-2 border-slate-100 rounded-2xl flex flex-col bg-white">
+                                <h3 class="text-lg font-extrabold text-slate-800 mb-3 flex items-center gap-2"><i
+                                        data-lucide="tag" class="w-5 h-5 text-slate-400"></i> 상품 속성(Attribute) 세분화</h3>
+                                <p class="text-sm font-medium text-slate-500 mb-4">엑셀 비고란의 비정형 데이터를 <span
+                                        class="font-bold text-slate-700">시스템 속성 필드로 표준화</span></p>
+                                <ul
+                                    class="space-y-3 text-sm font-semibold text-slate-700 mt-auto bg-slate-50 p-4 rounded-xl">
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2"
+                                            class="w-4 h-4 text-blue-500"></i> 타겟 연령층, 핏(Fit) 기준 마련</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2"
+                                            class="w-4 h-4 text-blue-500"></i> 소재 혼용률 정형화 입력 체계</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2"
+                                            class="w-4 h-4 text-blue-500"></i> 셋업/세트 다중 카테고리 분류</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 border-2 border-slate-100 rounded-2xl flex flex-col bg-white">
+                                <h3 class="text-lg font-extrabold text-slate-800 mb-3 flex items-center gap-2"><i
+                                        data-lucide="eraser" class="w-5 h-5 text-slate-400"></i> 데이터 정제(Cleansing)</h3>
+                                <p class="text-sm font-medium text-slate-500 mb-4">방대한 누적 코드의 휴면 처리 및 <span
+                                        class="font-bold text-slate-700">관리 효율화 기준 수립</span></p>
+                                <div
+                                    class="mt-auto h-24 bg-slate-50 rounded-xl flex items-center justify-center p-4 text-center border border-dashed border-slate-300">
+                                    <span class="text-sm font-bold text-slate-600">효율적 검색을 위한 클렌징(삭제 및 정리) 가이드라인
+                                        적용</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Work Order -->
+                <section id="slide-2" class="slide-content">
+                    <div class="mb-6 shrink-0 flex justify-between items-end border-b-2 border-slate-100 pb-4">
+                        <div>
+                            <span
+                                class="inline-block text-indigo-500 text-xs font-black tracking-widest uppercase mb-2">핵심
+                                과제 02</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <i data-lucide="file-text" class="text-indigo-600 w-8 h-8"></i> 작업지시서 개선
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-5 flex-1 min-h-0">
+                        <div
+                            class="col-span-2 p-6 border-2 border-indigo-100 bg-indigo-50/30 rounded-2xl flex items-center gap-6">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-extrabold text-slate-800 mb-4">작지 프로세스 통합</h3>
+                                <div class="flex items-center gap-4 mb-4 font-bold">
+                                    <div
+                                        class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-600 shadow-sm">
+                                        샘플 작지</div>
+                                    <i data-lucide="arrow-right" class="w-5 h-5 text-indigo-400"></i>
+                                    <div
+                                        class="px-4 py-2 bg-indigo-600 border border-indigo-600 rounded-lg text-white shadow-md">
+                                        메인 작지 (자동 연동)</div>
+                                </div>
+                            </div>
+                            <div class="flex-1 border-l-2 border-indigo-100 pl-6 py-2">
+                                <ul class="space-y-3 text-sm font-bold text-slate-700">
+                                    <li class="flex items-start gap-2"><i data-lucide="check"
+                                            class="w-5 h-5 text-indigo-500 shrink-0"></i> <span
+                                            class="text-highlight">자동 데이터 투영</span>으로 수기 재입력 방지</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="check"
+                                            class="w-5 h-5 text-indigo-500 shrink-0"></i> 확정 후 수정 시 <span
+                                            class="text-highlight">버전별 비교(Comparison)</span> 기능</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="p-6 border-2 border-slate-100 rounded-2xl bg-white flex flex-col">
+                            <h3 class="text-lg font-extrabold text-slate-800 mb-2">원부자재 스마트 연계</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">엑셀 수기 계산 후 단순 입력하는 방식에서 탈피</p>
+                            <div
+                                class="mt-auto bg-amber-50 border border-amber-100 p-4 rounded-xl flex gap-3 items-start">
+                                <i data-lucide="calculator" class="w-5 h-5 text-amber-600 mt-0.5 shrink-0"></i>
+                                <span class="text-sm font-bold text-amber-900">원/부자재 단가 변동 내역이 제품 최종 원가에 <span
+                                        class="underline decoration-2 underline-offset-2"> 반영되는 로직</span> 구현</span>
+                            </div>
+                        </div>
+
+                        <div class="p-6 border-2 border-slate-100 rounded-2xl bg-white flex flex-col">
+                            <h3 class="text-lg font-extrabold text-slate-800 mb-2">생산 에셋(비정형) 통합 관리</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">생산처와 명확한 정보 공유를 위한 고해상도 아카이빙</p>
+                            <div class="mt-auto grid grid-cols-3 gap-3">
+                                <div
+                                    class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col items-center justify-center gap-2 text-slate-600 font-bold text-xs">
+                                    <i data-lucide="image" class="w-6 h-6 text-slate-400"></i> 도식화
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col items-center justify-center gap-2 text-slate-600 font-bold text-xs">
+                                    <i data-lucide="scissors" class="w-6 h-6 text-slate-400"></i> 스와치
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col items-center justify-center gap-2 text-slate-600 font-bold text-xs">
+                                    <i data-lucide="camera" class="w-6 h-6 text-slate-400"></i> 샘플사진
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Scheduling -->
+                <section id="slide-3" class="slide-content">
+                    <div class="mb-6 shrink-0 flex justify-between items-end border-b-2 border-slate-100 pb-4">
+                        <div>
+                            <span
+                                class="inline-block text-emerald-500 text-xs font-black tracking-widest uppercase mb-2">핵심
+                                과제 03</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <i data-lucide="calendar" class="text-emerald-600 w-8 h-8"></i> 입고 스케줄 가시화
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 flex-1 min-h-0">
+                        <div class="p-8 border-2 border-emerald-100 bg-emerald-50/50 rounded-2xl flex flex-col">
+                            <h3 class="text-xl font-extrabold text-emerald-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="git-branch" class="w-6 h-6 text-emerald-600"></i> 분할 입고 유연성 (Batch Mgt)
+                            </h3>
+                            <div class="flex-1 flex flex-col justify-center gap-4">
+                                <div class="p-5 bg-white border border-slate-200 rounded-xl relative shadow-sm">
+                                    <div
+                                        class="absolute -top-3 left-4 px-2 py-0.5 bg-slate-700 text-white text-[10px] font-black rounded">
+                                        AS-IS</div>
+                                    <p class="text-sm font-bold text-slate-600">2차수 이후 시스템 수정 불가<br><span
+                                            class="text-red-500">→ 별도 엑셀 수기 이중 관리 발생</span></p>
+                                </div>
+                                <div class="flex justify-center"><i data-lucide="arrow-down" class="text-slate-300"></i>
+                                </div>
+                                <div class="p-5 bg-white border-2 border-emerald-400 rounded-xl relative shadow-md">
+                                    <div
+                                        class="absolute -top-3 left-4 px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-black rounded">
+                                        TO-BE</div>
+                                    <p class="text-base font-extrabold text-slate-800"><span class="text-highlight">전 차수
+                                            일정 시스템 수정 허용</span><br>모든 변경 이력 로그(Log)화</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-6">
+                            <div
+                                class="flex-1 p-6 border-2 border-slate-100 rounded-2xl bg-white flex items-center gap-5">
+                                <div
+                                    class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0">
+                                    <i data-lucide="bell-ring" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-extrabold text-slate-800 mb-1">실시간 일정 알림</h4>
+                                    <p class="text-sm font-semibold text-slate-500">입고 예정일(ETD/ETA) 변경 시 영업/물류팀에 <span
+                                            class="text-blue-600 font-bold">시스템 즉각 알림</span> 발송</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex-1 p-6 border-2 border-slate-100 rounded-2xl bg-white flex items-center gap-5">
+                                <div
+                                    class="w-14 h-14 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center shrink-0">
+                                    <i data-lucide="share-2" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-extrabold text-slate-800 mb-1">배분 로직 자동 연동</h4>
+                                    <p class="text-sm font-semibold text-slate-500">납기 지연 시 매장 배분 우선순위 로직과 연동되어 <span
+                                            class="text-purple-600 font-bold">빠른 물량 대응 지원</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: FONE-SONE -->
+                <section id="slide-4" class="slide-content">
+                    <div class="mb-6 shrink-0 flex justify-between items-end border-b-2 border-slate-100 pb-4">
+                        <div>
+                            <span
+                                class="inline-block text-orange-500 text-xs font-black tracking-widest uppercase mb-2">System
+                                Integration</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <i data-lucide="cpu" class="text-orange-500 w-8 h-8"></i> FONE - SONE 연계 최적화
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-5 flex-1 min-h-0">
+                        <div class="p-6 border-2 border-slate-100 bg-white rounded-2xl flex flex-col">
+                            <div
+                                class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-5">
+                                <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-3"><span class="text-highlight">데이터 재입력
+                                    Zero</span></h4>
+                            <p class="text-sm font-medium text-slate-600 leading-relaxed">MD가 기획 품번을 생성한 뒤 소싱(SONE)
+                                시스템으로 전환할 때 발생하는 수기 재입력을 원천 차단하여 정합성을 보장합니다.</p>
+                        </div>
+
+                        <div class="p-6 border-2 border-slate-100 bg-white rounded-2xl flex flex-col">
+                            <div
+                                class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-5">
+                                <i data-lucide="line-chart" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-3"><span class="text-highlight">수익성
+                                    시뮬레이션</span></h4>
+                            <p class="text-sm font-medium text-slate-600 leading-relaxed">소싱 단계의 확정 원가를 기획 화면에서 즉각 참조
+                                가능하도록 연계하여, 신속한 판가 결정 및 의사결정을 지원합니다.</p>
+                        </div>
+
+                        <div class="p-6 border-2 border-slate-100 bg-white rounded-2xl flex flex-col">
+                            <div
+                                class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-5">
+                                <i data-lucide="tags" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-extrabold text-slate-800 mb-3"><span class="text-highlight">TAG 발주
+                                    자동화</span></h4>
+                            <p class="text-sm font-medium text-slate-600 leading-relaxed">최종 작업지시서 확정 시점에 맞춰 TAG 발주 데이터가
+                                유관 시스템에 자동 생성되는 다이렉트 프로세스를 구현합니다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: Question List -->
+                <section id="slide-5" class="slide-content">
+                    <div class="mb-6 shrink-0 flex items-center justify-between border-b-2 border-slate-800 pb-4">
+                        <div>
+                            <span
+                                class="inline-block px-3 py-1 bg-slate-800 text-white text-[11px] font-black tracking-widest rounded mb-2 shadow-sm">Q&A
+                                SESSION</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                                실무 인터뷰 종합 질의
+                            </h2>
+                        </div>
+                        <div
+                            class="text-sm font-bold text-slate-500 flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-lg">
+                            <i data-lucide="info" class="w-4 h-4"></i> 기존 업무 방식 확인
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-5 flex-1 min-h-0">
+                        <!-- Area 1 Q -->
+                        <div
+                            class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                            <div class="bg-blue-600 p-3 text-center">
+                                <h4 class="text-sm font-black text-white uppercase tracking-widest">01. 기준정보</h4>
+                            </div>
+                            <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-blue-500 block mb-1">Q1.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">브랜드/시즌 코드에 영숫자 도입 시, 기존 엑셀
+                                        가공 업무의 제약 사항은?</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-blue-500 block mb-1">Q2.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">타겟 연령, 핏 등 엑셀 비고란 관리 속성 중
+                                        시스템 필드화가 가장 시급한 것은?</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-blue-500 block mb-1">Q3.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">칼라 코드, 사이즈 코드 관리를 위한 개선
+                                        요청사항</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Area 2 Q -->
+                        <div
+                            class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                            <div class="bg-indigo-600 p-3 text-center">
+                                <h4 class="text-sm font-black text-white uppercase tracking-widest">02. 작업지시서</h4>
+                            </div>
+                            <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-indigo-500 block mb-1">Q1.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">샘플→메인 전환 시 수기 재입력으로 인해 가장
+                                        불편한 항목은?</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-indigo-500 block mb-1">Q2.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">작업지시서 등록 시 추가 요청 항목과, 제거
+                                        하고 싶은 불필요 항목은?</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-indigo-500 block mb-1">Q3.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">BOM 계산용 별도 엑셀 수식이 있나요? 단가
+                                        변동 실시간 반영이 필요하신가요?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Area 3 Q -->
+                        <div
+                            class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                            <div class="bg-emerald-600 p-3 text-center">
+                                <h4 class="text-sm font-black text-white uppercase tracking-widest">03. 입고관리</h4>
+                            </div>
+                            <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <span class="font-black text-emerald-500 block mb-1">Q1.</span>
+                                    <p class="text-sm font-bold text-slate-700 leading-snug">일정 시스템 수정 불가로 인해 타 부서 소통
+                                        오류나 지연이 발생한 실제 사례가 있나요?</p>
+                                </div>
+                                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center mt-4">
+                                    <i data-lucide="lightbulb" class="w-6 h-6 text-emerald-500 mx-auto mb-2"></i>
+                                    <p class="text-xs font-bold text-emerald-800">답변해 주신 의견은 <br>차세대 시스템 개발에 적극 적용하겠습니다
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Footer Controls -->
+            <footer class="border-t border-slate-200 bg-white p-4 px-8 flex justify-between items-center shrink-0">
+                <div class="flex gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600 transition-all slide-dot" id="dot-0"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-200 transition-all slide-dot" id="dot-1"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-200 transition-all slide-dot" id="dot-2"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-200 transition-all slide-dot" id="dot-3"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-200 transition-all slide-dot" id="dot-4"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-200 transition-all slide-dot" id="dot-5"></span>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="changeSlide(-1)"
+                        class="px-6 py-2.5 text-sm font-bold border-2 border-slate-200 rounded-xl hover:bg-slate-50 text-slate-600 transition-all focus:outline-none flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> 이전
+                    </button>
+                    <button onclick="changeSlide(1)"
+                        class="px-8 py-2.5 text-sm font-bold bg-slate-800 rounded-xl hover:bg-slate-900 text-white transition-all focus:outline-none flex items-center gap-2 shadow-md">
+                        다음 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        let currentSlide = 0;
+        const totalSlides = 6;
+
+        function showSlide(index) {
+            if (index < 0 || index >= totalSlides) return;
+
+            // Progress Bar
+            const progress = ((index + 1) / totalSlides) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            // Dots update
+            document.querySelectorAll('.slide-dot').forEach((d, i) => {
+                if (i === index) {
+                    d.classList.remove('bg-slate-200');
+                    d.classList.add('bg-blue-600', 'w-6');
+                } else {
+                    d.classList.remove('bg-blue-600', 'w-6');
+                    d.classList.add('bg-slate-200');
+                }
+            });
+
+            // Slides
+            document.querySelectorAll('.slide-content').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide-${index}`).classList.add('active');
+
+            // Nav Highlight
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('step-active');
+            });
+            const targetNav = document.getElementById(`nav-${index}`);
+            if (targetNav) targetNav.classList.add('step-active');
+
+            currentSlide = index;
+        }
+
+        function changeSlide(dir) {
+            showSlide(currentSlide + dir);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+
+</html>

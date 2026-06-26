@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Obsidian Configs (excluding local workspace state to prevent conflicts)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Local project state / scratch folders
+.wiki_state/
+scratch/

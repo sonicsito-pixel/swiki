@@ -1,0 +1,60 @@
+0. IT 조직 소개
+ 1) 경영정보1팀 : 수출(ESP), 소싱(S-ONE), 회계(K-ONE), 인사(GHR), 해외법인생산(PMS)
+ 2) 경영정보2팀 : 가나안-수출, 회계, 인사(B2BERP), 해외법인생산(FMS) 
+ 3) 패션IT팀 : 패션(F/A-ONE, F/A/T-POS), 매장관리앱, 매출정보앱, 매출분석(BW), 매장계약직관리(S-인사), 물류관리(WMS), 유통관리(RICHMART)
+ 4) 온라인IT팀 : 탑텐몰(TTMALL), 온라인 제휴몰 연동관리(ex. 쿠팡, g마켓..), 주문관리(ODMS), EC
+ 5) 정보보안팀 : 그룹웨어/메일/사내메신저(GW), 네트워크(NW), 서버(HW), 소프트웨어(SW)
+
+1. 파일서버 
+ 1) \\150.149.88.101\패션it팀 / fit / fsistts
+ 2) \\150.149.88.98\File Management / mis / sstsmis
+
+2. R&R : \\150.149.88.101\패션it팀\900.팀원소통
+
+3. 주간업무보고 
+ 1) 본인 영역 생성 후 OJT 등 해당 주에 진행한 내역 기재
+ 2) 매주 금 15:00 진행
+
+4. 팀메일
+ 1) fit@ssts.co.kr
+ 2) eit(경영정보1팀), oit(온라인IT팀), sit(정보보안팀), mis(IT팀 전체)
+
+5. 패션영업시스템 서버 구성
+ 1) \\150.149.88.101\패션it팀\10.매뉴얼&교육자료\00 OJT 교육자료\01 패션영엽관리 시스템 구성도
+ *. nslookup a-pos.ation.co.kr : 도메인으로 IP 조회하는 명령어
+ 2) WASADMIN(JEUS)
+  - SSTS : http://221.149.41.101:10000/webadmin/login / wasadmin / jeusadmin1!
+  - ATION : http://221.149.41.103:20000/webadmin/login / wasadmin / jeusadmin1!
+ 3) APM
+  - jeniffer : http://10.0.22.5:7900/ fashion / Shinsung1!
+
+*. JEUS CONTAINER 구성
+[SSTS]
+optima5-101-1 : F-ONE
+optima5-102-1 : F-ONE
+optima5-103-1 : F-ONE
+
+optima5-101-2 : F-POS
+optima5-102-2 : F-POS
+optima5-102-2 : F-POS
+
+optima5-101-3 : T-POS
+optima5-102-3 : T-POS
+optima5-103-3 : T-POS
+
+optima5-101-4 : ESP/S-ONE
+optima5-102-4 : ESP/S-ONE
+optima5-103-4 : ESP/S-ONE
+
+optima5-101-5 : 앱
+optima5-102-5 : 앱
+optima5-103-5 : 앱
+
+[ATION]
+optima6-101-1 : A-ONE
+optima6-102-1 : A-ONE
+optima6-103-1 : A-ONE
+
+optima6-101-2 : A-POS
+optima6-102-2 : A-POS
+optima6-103-2 : A-POS

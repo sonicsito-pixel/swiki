@@ -1,0 +1,510 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset="utf-8">
+    <title>신성통상 차세대 패션관리 시스템(FA-ONE) 내부 PI 종합보고서</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+        @page {
+            size: 21cm 29.7cm; /* A4 */
+            margin: 2.5cm 2.5cm 2.5cm 2.5cm;
+            mso-header-margin: 35.4pt;
+            mso-footer-margin: 35.4pt;
+            mso-paper-source: 0;
+        }
+        body { font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif; line-height: 1.6; color: #333; }
+        .title-container { text-align: center; padding-top: 150px; height: 100%; }
+        h1.title { font-size: 26pt; color: #0f2c59; font-weight: bold; margin-bottom: 20px; line-height: 1.3; }
+        p.subtitle { font-size: 15pt; color: #555; margin-bottom: 250px; }
+        p.meta { text-align: right; font-size: 11pt; color: #444; margin-right: 20px; line-height: 2.0; font-weight: bold; }
+        .page-break { page-break-before: always; }
+        h1 { font-size: 18pt; color: #0f2c59; border-bottom: 2px solid #0f2c59; padding-bottom: 5px; margin-top: 40px; margin-bottom: 20px; }
+        h2 { font-size: 14pt; color: #1c5c8a; border-left: 5px solid #1c5c8a; padding-left: 10px; margin-top: 30px; margin-bottom: 15px; }
+        h3 { font-size: 11.5pt; color: #333; margin-top: 20px; margin-bottom: 10px; font-weight: bold; }
+        p, li { font-size: 10.5pt; line-height: 1.6; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; table-layout: fixed; }
+        th, td { border: 1px solid #c0c0c0; padding: 10px; font-size: 10pt; line-height: 1.5; vertical-align: top; }
+        th { background-color: #f2f5f9; font-weight: bold; color: #0f2c59; text-align: center; }
+        .highlight { background-color: #fff3cd; }
+        .alert-box { background-color: #f7f9fa; border-left: 4px solid #0f2c59; padding: 10px 15px; margin: 15px 0; font-size: 10pt; }
+        .bullet-list { margin-left: 20px; margin-top: 5px; margin-bottom: 5px; }
+        .bullet-list li { margin-bottom: 6px; }
+        .text-center { text-align: center; }
+        .text-bold { font-weight: bold; }
+        .req-id { color: #d9411e; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 표지 (Cover Page) -->
+    <div class="title-container">
+        <h1 class="title">신성통상 차세대 패션관리 시스템(FA-ONE)<br>내부 PI 프로젝트 종합 요약 보고서</h1>
+        <p class="subtitle">영업관리 및 상품기획(MD) 프로세스 혁신 요구사항(RFP)</p>
+        
+        <p class="meta">
+            작성일자: 2026년 5월 26일<br>
+            작성부서: 신성통상 IT기획팀 / PI 프로젝트 TFT<br>
+            협업지원: Antigravity AI 코딩 어시스턴트
+        </p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 2. 목차 (TOC) -->
+    <h1>목 차</h1>
+    <div style="margin-top: 40px; line-height: 2.2; font-size: 12pt;">
+        <p><b style="color: #0f2c59;">I. 프로젝트 개요 및 추진 방향</b> ············································································· 3</p>
+        <p><b style="color: #0f2c59;">II. 영업관리(Sales Management) PI 상세 분석</b> ·························································· 4</p>
+        <p style="margin-left: 20px;">1. 매장 및 기준정보 관리 ····························································································· 4</p>
+        <p style="margin-left: 20px;">2. 매출 확정 및 자동 정산 엔진 ··················································································· 5</p>
+        <p style="margin-left: 20px;">3. 실시간 재고 가시성 및 수불 관리 ············································································· 6</p>
+        <p style="margin-left: 20px;">4. 액티브 리스크 및 채권 모니터링 ················································································ 7</p>
+        <p style="margin-left: 20px;">5. 증빙 자동화 및 연동 관리 ························································································· 8</p>
+        <p><b style="color: #0f2c59;">III. 상품기획(Item Planning) PI 상세 분석 (Centric PLM & AI)</b> ····································· 9</p>
+        <p style="margin-left: 20px;">1. PLM-Planning-FONE(ERP) 3각 연동 아키텍처 ··························································· 9</p>
+        <p style="margin-left: 20px;">2. AI Smart Tagging 및 속성 자동화 ············································································· 10</p>
+        <p style="margin-left: 20px;">3. AI 기반 물량 배분 및 외부 경쟁사 분석(CMI) ···························································· 11</p>
+        <p><b style="color: #0f2c59;">IV. 선진사 사례 벤치마킹 기반 차세대 적용 전략</b> ·························································· 12</p>
+        <p><b style="color: #0f2c59;">V. 프로젝트 로드맵 및 향후 실행 계획 (Next Actions)</b> ···················································· 13</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 3. 본문 내용 시작 -->
+    <h1>I. 프로젝트 개요 및 추진 방향</h1>
+    
+    <h2>1. 프로젝트 배경</h2>
+    <p>
+        신성통상은 브랜드 다각화와 유통 채널 다양화에 발맞추어, 기존 레거시 인프라의 제약을 극복하고 데이터 기반의 의사결정을 실현하기 위한 차세대 패션관리 시스템(FA-ONE) 구축 사업을 추진하고 있습니다. 본 PI(Process Innovation) 프로젝트는 개발 전 현업의 실제 업무 애로사항(Pain Point)을 상세히 진단하여 시스템 제약과 수기 엑셀 수작업의 원인을 규명하고, 이를 차세대 시스템의 RFP(제안요청서) 핵심 요구사항으로 반영하는 것을 목적으로 합니다.
+    </p>
+
+    <h2>2. PI 추진 방법론</h2>
+    <p>
+        영업관리 및 상품기획(MD) 현업 부서의 심층 인터뷰(FGI) 및 엑셀 데이터 분석을 토대로 **"As-Is(현행 업무 실태) - To-Be(목표 프로세스) - Gap(시스템 격차 원인) - 해결방안(RFP 요구사항)"**의 4단계 표준 분석 프레임워크를 엄격하게 적용하여 개선 방향을 도출하였습니다.
+    </p>
+    
+    <div class="alert-box">
+        <b>[내부 PI 4단계 분석 표준 원칙]</b><br>
+        1. <b>As-Is (현행):</b> 현행 수기 업무의 제약 사항과 비효율적 데이터 처리 방식을 상세 기술.<br>
+        2. <b>To-Be (목표):</b> 디지털 전환(DX) 후 자동화 및 실시간 동기화가 반영된 이상적인 업무 모습.<br>
+        3. <b>Gap (격차):</b> 데이터 단절, 데이터 정합성 부재, 시스템 연동 미비 등 병목 현상의 근본 원인 분석.<br>
+        4. <b>해결방안 (RFP):</b> 외부 개발업체에 전달하여 즉시 견적 및 구축에 활용 가능한 기능적 기술 요구사항 기술.
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1>II. 영업관리(Sales Management) PI 상세 분석</h1>
+    <p>영업관리 업무는 데이터의 단절 및 유통망 정산 내역과의 대조 등 수기 의존도가 높아, 자동 매칭 및 실시간 제어 체계를 갖추는 것을 최우선으로 분석하였습니다.</p>
+
+    <h2>1. 매장 및 기준정보 관리</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 대리점 및 백화점 점주나 사업자가 변경될 때마다 매장 코드가 새로 채번됨.<br>
+                - 이에 따라 동일 매장의 과거 시점 매출 및 재고 이력 추적이 불가능해져 시계열 성과 분석 시 데이터 단절 발생.<br>
+                - 매장 등록 화면 내 영업(계약), 회계(금융/세무), 물류(배송지) 정보가 통합 관리되지 않고 수기 입력을 병행하여 오염 발생 빈도가 높음.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - 사업자번호 변경과 무관하게 유지되는 물리적 거점 중심의 '영구 고유 매장코드'를 PK(Primary Key)로 관리.<br>
+                - 점주, 사업자 정보, 수수료 조건 등의 시점별 속성 변화는 이력 DB를 통해 관리(SCD Type 2 방식).<br>
+                - 부서별 전용 입력 탭(Tab)을 제공하고 필수값 검증 후 단계를 승인하는 데이터 거버넌스 프로세스 정립.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 데이터 모델링 상 이력 관리를 위한 SCD(Slowly Changing Dimension) 이력 관리 엔진의 부재.<br>
+                - 부서별 정보 입력 권한 제어 및 무결성 검증을 제어하는 워크플로우 승인 기능 미비.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">REQ-MDM-001</span>: 위치 기반 고유 매장코드 체계 수립 및 타임스탬프 기반 SCD 이력 관리 기능 구현.<br>
+                - <span class="req-id">REQ-MDM-002</span>: 영업, 회계, 물류 부서별 입력 탭 분리 및 필수 필드 입력 검증 워크플로우 엔진 구축.
+            </td>
+        </tr>
+    </table>
+
+    <h2>2. 매출 확정 및 자동 정산 엔진</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 백화점, 아울렛 등 대형 유통망별 정산 금액 확인 시, 담당 MD가 유통망별 EDI 사이트에 개별 접속하여 엑셀 데이터를 다운로드함.<br>
+                - 포스(POS) 매출 실적 및 VAN사 입금 실적과의 수기 대조 공수가 과다하게 발생하며, 1원 단위 정합성을 찾기 위해 전수 조사를 감행함.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - Integration Hub를 통해 유통망 EDI 정산 데이터 및 VAN/카드사 입금 데이터를 자동 스케줄러로 수집.<br>
+                - 수집된 데이터는 표준 양식으로 자동 ETL 처리된 후 내부 매출과 자동 대조(3-Way Matching).<br>
+                - 차액이 없는 건은 Zero-Touch 자동 승인되며, 미매칭 건만 대시보드에 Alert로 노출하여 예외 관리.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 외부 유통망/금융 시스템과의 데이터 인터페이스 스케줄러 연동 미비.<br>
+                - 실시간 3자 데이터 자동 비교 및 불일치 사유 제안 알고리즘 부재.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">REQ-SLS-001</span>: 백화점 EDI 및 VAN사 입금 API 연동 인터페이스 스케줄러 구축.<br>
+                - <span class="req-id">REQ-SLS-002</span>: ERP 매출 - 유통망 정산액 - 입금액 간의 3-Way Auto-Matching 엔진 및 차액 예외 분석 대시보드 구현.
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>3. 실시간 재고 가시성 및 수불 관리</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 매장 간 재고 이동(RT) 시, 수송 중 재고(In-Transit)에 대해 가상 창고(OA/조정창고)를 남용하여 실시간 위치 추적이 불가하고 이력이 왜곡됨.<br>
+                - 매장에서 판촉용 또는 직원 유니폼 등으로 자가소모하는 재고 발생 시, 물류센터로 불필요하게 반품 처리한 후 소모 처리하거나 수기로 회계 보고하여 수불 불일치 초래.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - 논리적 거점(Hub)-종속(Spoke) 매장 계층을 정의하여 종속 매장 판매 시 거점 재고를 실시간 차감 및 배분.<br>
+                - '이동 중 재고'의 실시간 상태를 시스템에서 관리하고 미확정 기간 경과 시 담당자에게 알림.<br>
+                - 매장 현장에서 POS 및 전용 App을 사용하여 직접 자가소모를 등록하고, 즉시 수불 차감 및 판촉비 회계 전표 자동 연동.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 실시간 수송 재고 이력 추적 모델링 및 경보 룰 부재.<br>
+                - 매장 단말을 통한 즉시 자가소모 승인 처리 프로세스 및 전표 자동 분개 로직 단절.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">REQ-INV-001</span>: Hub-Spoke 실시간 논리 수불 및 이동 중 재고 추적 관리 시스템 구현.<br>
+                - <span class="req-id">REQ-INV-002</span>: 매장 단말(POS/모바일 앱) 완결형 자가소모 직접 처리 및 회계 전표 연동 API 개발.
+            </td>
+        </tr>
+    </table>
+
+    <h2>4. 액티브 리스크 및 채권 모니터링</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 가상계좌(CMS)를 통한 대리점의 입금 확인 처리가 영업 시간 중 즉시 채권에 반영되지 않음.<br>
+                - 담보 한도 초과 상태인 부실 위험 매장에 대해 실시간 매출/출고 통제가 원활치 않아 사후 미수 채권 사고 발생 리스크가 높음.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - CMS 실시간 연동을 통한 가상계좌 1:1 입금 정보의 채권 실시간 상계(Real-time Offset).<br>
+                - 리스크 단계(경고, 판매제한, 접속차단)별 자동 통제 로직(Auto-Blocking)을 탑재하여 임계 한도 초과 시 실시간 제어 작동.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 은행 CMS 입금 배치 처리 방식에 의한 실시간성 부족.<br>
+                - 채권/담보 데이터와 포스 판매/물류 출고 시스템 간의 실시간 연동 인터랙션 제어 모듈 부재.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">REQ-ACC-001</span>: CMS 입금 실시간 채권 상계 처리 및 실시간 한도 초과 자동 판매 제어(Auto-Blocking) 로직 구현.<br>
+                - 실시간 채권 연령(Aging) 분석 리스크 스코어링 대시보드 구축.
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>5. 증빙 자동화 및 연동 관리</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 정산 완료 후 대리점 수수료 지급 시 트러스빌(Trustbill) 연동 양식을 수기로 엑셀 업로드하여 역발행함.<br>
+                - 소모품비, 매장 부자재비, AS 수선비 등 매장에 청구할 공제 항목이 타 부서 시스템에 흩어져 있어 마감 단계에서 담당자가 메일/전화로 취합 후 정산서에 수기 반영함.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - 수수료 정산 확정 즉시 트러스빌 API를 통해 전자세금계산서가 자동 역발행되도록 연동.<br>
+                - 판부자재, AS 등 타 부서 비용 데이터를 ERP 내부 정산 공제 데이터로 실시간 자동 인터페이스.<br>
+                - ERP 전표 조회 화면 내에서 세금계산서 발행 상태 및 국세청 전송 로그를 원클릭 통합 조회.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 트러스빌 외부 세무 API와의 실시간 데이터 전송 모듈 단절.<br>
+                - 자사 내 물류(부자재), 고객 만족(AS) 시스템과 회계 정산 시스템 간의 공제 정보 데이터 파이프라인 부재.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">REQ-DOC-001</span>: Trustbill API 연동 세금계산서 자동 역발행 및 ERP 화면 내 증빙 이미지(PDF) 통합 뷰어 구축.<br>
+                - 전사 공제 비용 데이터(물류/AS)의 자동 정산 전표 매핑 프로세스 구축.
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1>III. 상품기획(Item Planning) PI 상세 분석 (Centric PLM & AI)</h1>
+    <p>상품기획 영역은 Centric PLM 솔루션 도입을 기점으로 기획 단계에서 생산, ERP 연동까지의 데이터 정합성 보장과 AI 기술 융합에 초점을 두었습니다.</p>
+
+    <h2>1. PLM-Planning-FONE(ERP) 3각 연동 아키텍처</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 시즌 기획 시, 확정된 디자인이 없으면 품번 생성이 불가하여 엑셀 상에서 수기 수량(더미 데이터)으로 관리함.<br>
+                - 기획 시 예상 원가(Planning), 디자인 시 스펙 기반 원가(PLM), 그리고 실제 생산 입고 후 실제 발생 원가(ERP)가 각각 단절되어 버전을 비교 분석하기 위해 이중 엑셀 정리 작업 수행.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - Centric Planning 솔루션에서 시즌 매출 목표 달성을 위해 생성한 '더미 SKU' 정보를 Centric PLM의 작업지시서 마스터 데이터로 자동 이관.<br>
+                - 기획 원가 vs 확정 원가 vs 실제 생산 원가의 3단계 흐름을 일괄 비교 모니터링할 수 있는 다차원 원가 이력 관리(Version Control) 기능 구현.<br>
+                - ERP의 실제 수입 제비용/공장 임가공 비용 등을 PLM으로 역인터페이스하여 원가 정합성 자동 확보.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - Planning-PLM 간 목표 정보 연동 인터페이스 부재.<br>
+                - ERP 생산 원가 데이터를 수집하여 디자인/기획 원가와 대조하는 데이터 이력 관리 모델 미비.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">Q-A1 & Q-A2</span>: 기획 더미 SKU 정보의 PLM 자동 연동 표준 API 구축 및 기획-확정-실제 원가 간 다차원 이력 관리 버전 컨트롤 시스템 구축.<br>
+                - <span class="req-id">Q-A3</span>: ERP 마스터 동기화 후 PLM 내 특정 주요 필드의 자동 수정 불가(Read-only) 제약 설정 및 상태 제어 권한 수립.
+            </td>
+        </tr>
+    </table>
+
+    <h2>2. AI Smart Tagging 및 속성 자동화</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 디자인 확정 후 작업지시서 작성 시, MD 및 디자이너가 핏, 소재, 네크라인, 소매 디테일, 카테고리 등 수십 가지의 디자인 기준정보 속성을 매 항목마다 수기 선택 및 타이핑 입력함.<br>
+                - 수기 입력에 의한 오기입률이 높고, 신상품 등록 시점마다 수백 개의 스타일에 대한 단순 반복 공수가 극심함.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - 샘플 실물 사진이나 디자이너의 도식화 이미지를 드래그 앤 드롭으로 업로드하면, AI 엔진이 이미지의 시각 정보를 실시간으로 판독하여 소재(원단), 실루엣, 칼라, 네크라인 등 마스터 속성을 자동 추천 및 매핑.<br>
+                - AI가 신성통상 표준 코드 북(Code Book) 속성으로 자동 태깅하고, MD는 검증 화면에서 단순 승인 및 일부 보완 작업만 수행.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 컴퓨터 비전(Computer Vision) 기반 이미지 분석 AI 라이브러리 및 마스터 코드 학습 파이프라인의 부재.<br>
+                - 대용량 고해상도 디자인 이미지 자산 관리(DAM) 및 리사이징, 캐싱 기술력 미적용.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">Q-B1 & Q-B3</span>: 자체 또는 하이브리드 AI 스마트 태깅 엔진 구축, 자사 마스터 코드 매핑 커스터마이징 파인튜닝, AI 제안 속성의 승인/수정 전용 검증 UI 및 낮은 매치율(예: 70% 이하) 경고 워크플로우 설계.<br>
+                - <span class="req-id">Q-B2</span>: 대용량 이미지 자산 자동 압축 업로드 처리 및 ERP/외부 쇼핑몰 연동을 위한 이미지 CDN 경로 참조 연동 아키텍처 구성.
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>3. AI 기반 물량 배분 및 외부 경쟁사 분석(CMI)</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">분석 항목</th>
+            <th style="width: 80%;">세부 분석 내용</th>
+        </tr>
+        <tr>
+            <td class="text-bold">As-Is<br>(현행 업무)</td>
+            <td>
+                - 매장별 A, B, C 등급을 연 1~2회 사후 실적 위주로 고정 설정하여 등급 기반으로 초도 배분을 일괄 진행함. 시즌 중 급변하는 판매 속도(Rate of Sale)를 실시간 반영하지 못해 인기 매장 품절 및 비인기 매장 재고 과다 현상이 반복됨.<br>
+                - 타 브랜드의 가격 변동, 품절율 등의 트렌드 조사를 위해 MD가 개별 웹 사이트를 수기 서칭하여 보고함.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">To-Be<br>(목표 프로세스)</td>
+            <td>
+                - AI 알고리즘이 매장의 주간/일간 판매 속도와 예측 수요를 실시간 추적하여 매장 등급을 동적으로 재조정하고 최적 초도 배분 물량을 자동 추천함.<br>
+                - AI 경쟁사 분석 모듈(CMI)을 구동하여 국내 주요 패션 브랜드 및 무신사 등의 가격 할인, 품절 여부 등을 자동 크롤링하고 자연어 처리 분석하여 비교 대시보드에 적재.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">Gap<br>(격차 원인)</td>
+            <td>
+                - 탄력적 수요 예측 및 매장 동적 등급화를 위한 분석 머신러닝 모델 부재.<br>
+                - 국내 주요 웹 환경(자연어 분석, 크롤링 방지 우회 등) 맞춤형 CMI 모듈 도입 미진.
+            </td>
+        </tr>
+        <tr>
+            <td class="text-bold">해결방안<br>(RFP 요구사항)</td>
+            <td>
+                - <span class="req-id">Q-C1 & Q-C2</span>: Centric Planning 기반 매장 실시간 판매 속도(ROS) 분석 동적 등급 산정 및 ERP 자동 출고 연동 API 개발, 국내 주요 패션 브랜드 몰 및 종합 쇼핑몰 대상 CMI 한글 텍스트 자연어 비교 분석 요건화.
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1>IV. 선진사 사례 벤치마킹 기반 차세대 적용 전략</h1>
+    <p>데상트코리아, K2, 신세계인터내셔날 등 국내외 선진 패션 기업의 핵심 성공 요소를 차세대 FA-ONE에 내재화하기 위한 주요 전략입니다.</p>
+
+    <h3>1. 기준정보(Master Data) 거버넌스</h3>
+    <ul class="bullet-list">
+        <li><b>선진사 사례</b>: 전사적 영향도를 반영한 분석속성 통제 시스템(MDM)을 통해 마스터 데이터의 무결성 실시간 체크.</li>
+        <li><b>자사 적용안</b>: 향후 브랜드 코드 체계를 기존 2자리에서 영숫자 3~4자리로 확장 시, 데이터 혼선을 막기 위해 신/구 코드를 일정 기간 병행 운영 후 소멸시키는 전략을 수립함. 정보 입력 시 IT 정보와 MD 분석 속성 분류를 별도로 구분하여 입력 단계에서 validation 체크 로직을 강화함.</li>
+    </ul>
+
+    <h3>2. 인프라 및 DB 현대화</h3>
+    <ul class="bullet-list">
+        <li><b>선진사 사례 (데상트코리아)</b>: 기존 Oracle 온프레미스의 핵심 프로시저 자산을 그대로 유지하면서 OCI(Oracle Cloud Infrastructure) 클라우드로 이전하여 비용 절감 및 30% 이상의 인프라 성능 개선 실현.</li>
+        <li><b>자사 적용안</b>: 자사 역시 다수의 복잡한 비즈니스 로직이 오라클 프로시저로 구현되어 있는 바, 완전 재개발 방식 대신 OCI 클라우드 마이그레이션을 우선 추진하여 기존 자산을 보호함. 또한 AI 이미지 검색(Vector Search)을 고려하여 대용량 고해상도 이미지는 DB에 직접 넣지 않고 Object Storage로 분리하여 저장하고 DB 부하를 최소화함.</li>
+    </ul>
+
+    <h3>3. API 중심의 시스템 인터페이스 표준화</h3>
+    <ul class="bullet-list">
+        <li><b>선진사 사례 (신세계인터내셔날)</b>: EAI(Enterprise Application Integration)의 복잡한 배치 구조 대신, 전사 시스템 간 데이터 연동 및 외부 이커머스 채널 연동을 RESTful API 기반의 API Gateway 구조로 통합 운영.</li>
+        <li><b>자사 적용안</b>: 차세대 FA-ONE은 모든 비즈니스 트랜잭션을 API화하는 'Headless ERP' 아키텍처를 지향함. 외부 솔루션(PLM, WMS) 및 대형 유통사와의 연결 창구를 API Gateway로 단일화하여 유지보수 비용을 절감하고 실시간 정합성을 유지함.</li>
+    </ul>
+
+    <h3>4. 상품 및 영업 실무 기능 내재화</h3>
+    <ul class="bullet-list">
+        <li><b>선진사 사례 (K2)</b>: 기획 단계부터 세트(Set) 상품 개념을 도입하고, 매장 현장의 스마트폰 앱을 활용한 실시간 이동 및 실적 관리 활성화.</li>
+        <li><b>자사 적용안</b>: 세트 상품 등록 시 하위 단품(SKU)과의 1:N 맵핑 및 기획-영업-물류-정산 프로세스 상 세트 처리 로직을 ERP 기본 사양으로 개발함. 또한 현장 영업 담당자가 이동 중에도 모바일 기기로 재고 조정, 매장 간 이동 승인, 일일 채권 및 정산 공제 조회를 완료할 수 있도록 모바일 플랫폼을 기본 내재화함.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h1>V. 시스템 통합 아키텍처 및 레거시(JDK 1.6) 극복 방안</h1>
+    <p>신성통상의 중장기 과제인 구버전 Java 인프라(OpenJDK 1.6) 현대화 과정에서 발생할 수 있는 시스템 간 통신 제약 및 극복 기술 방안입니다.</p>
+
+    <h3>1. 레거시(JDK 1.6) 환경의 TLS 보안 연동 우회</h3>
+    <ul class="bullet-list">
+        <li><b>문제점</b>: 최신 Centric PLM/Planning 솔루션의 API는 고수준의 암호화 프로토콜(TLS 1.2/1.3)을 강제하나, OpenJDK 1.6 환경의 자사 레거시 시스템은 해당 암호화 스펙을 기본적으로 지원하지 못해 직접적인 HTTPS 연동이 차단될 위험이 있음.</li>
+        <li><b>해결방안</b>: 레거시 ERP와 클라우드 PLM 솔루션 사이에 보안 인증 및 암호화를 중계하는 **"리버스 프록시(Reverse Proxy) 또는 경량 API Gateway(예: Spring Cloud Gateway)"**를 중간 허브로 배치함. 레거시는 이 허브와 보안 제약이 낮은 영역(내부 통신)으로 연동하고, 허브가 솔루션 측에 TLS 1.3 보안 세션을 맺어 데이터를 릴레이하는 중계 아키텍처를 제안함.</li>
+    </ul>
+
+    <h3>2. 인터페이스 트랜잭션 보장 및 모니터링</h3>
+    <ul class="bullet-list">
+        <li>대량의 작업지시서 정보(스타일, 자재 정보 등) 이관 시 네트워크 지연이나 대상 시스템 다운으로 유실되는 것을 방지하기 위해 **"메시지 큐(Message Queue, 예: RabbitMQ 등)"**를 도입하여 실패 시 재시도(Retry) 정책을 수행함.</li>
+        <li>송수신 성공 여부와 오류 로그를 현업 및 IT담당자가 실시간 감지할 수 있도록 직관적인 인터페이스 통합 모니터링 대시보드 기능을 구축하도록 요구함.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h1>VI. 프로젝트 로드맵 및 향후 실행 계획</h1>
+
+    <h2>1. 차세대 FA-ONE 구축 3단계 로드맵</h2>
+    <p>성공적인 차세대 시스템 구축을 위해 다음과 같이 단기, 중기, 장기 과제를 3단계로 나누어 순차 추진합니다.</p>
+    
+    <table>
+        <tr>
+            <th style="width: 25%;">단계 (추진 일정)</th>
+            <th style="width: 45%;">핵심 개발 내용</th>
+            <th style="width: 30%;">비고 / 마일스톤</th>
+        </tr>
+        <tr>
+            <td class="text-bold">Phase 1<br>(1차 년도)</td>
+            <td>
+                - 기준정보 통합 모델 수립 (SCD 이력 엔진)<br>
+                - ERP 코어 재구축 및 API Gateway 기초 인프라 설계<br>
+                - WMS-FONE 창고 코드 통합 단일화 추진
+            </td>
+            <td>2026년 7월<br>창고코드 일원화 마일스톤</td>
+        </tr>
+        <tr>
+            <td class="text-bold">Phase 2<br>(2차 년도)</td>
+            <td>
+                - Centric PLM/Planning 3각 연동 시스템 연동 구축<br>
+                - AI 이미지 스마트 태깅 시범 운영 및 최적화<br>
+                - 모바일 매장/영업 관리 플랫폼 오픈
+            </td>
+            <td>영업 및 상품기획(MD)<br>DX 고도화 완료</td>
+        </tr>
+        <tr>
+            <td class="text-bold">Phase 3<br>(3차 년도 이후)</td>
+            <td>
+                - AI CMI 경쟁사 분석 자동화 전사 도입<br>
+                - 기준정보 속성 체계 고도화 및 전 상품 자동 태깅 연동<br>
+                - 구버전 자바(JDK 1.6) 레거시 인프라 현대화 완성
+            </td>
+            <td>글로벌 패션 DT 리더<br>도약 목표</td>
+        </tr>
+    </table>
+
+    <h2>2. 향후 4주 실행 과제 (Next Actions)</h2>
+    <p>본 PI 종합보고서 도출 이후 즉각 추진해야 하는 유관 부서 및 협력사 협업 사항입니다.</p>
+    <ul class="bullet-list">
+        <li><b>센트릭소프트 코리아 기술 타당성 회신 검증</b>: 당 TFT에서 공식 발송한 기술질의서(SSTS-QA-2026-001)에 대해 솔루션 사로부터 제출된 답변을 바탕으로 레거시 JDK 1.6 보안 통신 우회 아키텍처 및 이미지 CDN 참조 연동 API의 타당성을 최종 검증함.</li>
+        <li><b>상품기획 MD 5월 4주차 심층 인터뷰 실시</b>: 고도화된 PLM 연동 시나리오를 바탕으로 현업 MD들이 PLM 도입 시 기존 엑셀 업무 중 '어떤 항목을 완전히 폐기하고 삭제할 것인지'를 구체적으로 확정하여 업무 단순화 목표치를 정량화함.</li>
+        <li><b>공급분 매입/재매입 프로세스 표준화</b>: 영업관리 김남형 과장 및 물류/회계 부서와 협업하여 복잡한 반품 및 공급분 재매입 정산 프로세스를 시스템 자동 분개형 Flow로 상세 맵핑함.</li>
+        <li><b>AI Vector Search 이미지 PoC 데이터 샘플링</b>: AI 스마트 태깅 엔진의 fine-tuning을 위해 브랜드별 고해상도 도식화 및 샘플 이미지 데이터 1,000건 이상을 추출 및 분류하여 파일럿 PoC 시범 학습을 준비함.</li>
+    </ul>
+
+</body>
+</html>
