@@ -9,24 +9,24 @@ This document visualizes the optimized TO-BE processes for the Next-Gen ERP syst
 
 ```mermaid
 graph TD
-    A["Brand/Business Strategy"] --> B{Store Open/Change?}
-    B -->|Yes| C["F-ONE: Integrated Store Management UI"]
+    A["브랜드/사업 전략"] --> B{매장 오픈/변경 여부?}
+    B -->|Yes| C["F-ONE: 통합 매장 관리 UI"]
     
-    subgraph "Master Data Definition"
+    subgraph "기준정보 정의"
         C --> D[매장 코드 및 속성 등록]
         D --> D1[거점-종속 매장 관계 정의]
         D1 --> D2[중간관리자 매핑 및 수수료율 설정]
     end
 
-    D2 --> E[Real-time Sync to AIS]
-    E --> F[Auto-assign Sub-store Info]
-    F --> G[Ready for Sales/Inventory]
+    D2 --> E[AIS 실시간 동기화]
+    E --> F[종속 매장 정보 자동 할당]
+    F --> G[매출/재고 관리 준비 완료]
     
     %% Hub-Spoke Concept
     H["거점매장 (Anchor)"] --- I["종속매장 A"]
     H --- J["종속매장 B"]
     
-    subgraph "Legacy (AS-IS) Pain Points"
+    subgraph "기존 (AS-IS) Pain Points"
         K["수기 엑셀로 거점 구조 관리"]
     end
     D1 -.->|시스템화| K
@@ -39,7 +39,7 @@ graph TD
 
 ```mermaid
 graph TD
-    subgraph "POS & Sales Event"
+    subgraph "POS 및 매출 발생"
         A["매장/온라인 매출 발생"] --> B{프로모션 적용?}
         B -->|Yes| C[실시간 할인/쿠폰 배분 로직 적용]
         B -->|No| D[일반 매출 확정]
@@ -47,7 +47,7 @@ graph TD
         D --> E
     end
 
-    subgraph "F-ONE: Validation & Allocation"
+    subgraph "F-ONE: 검증 및 배분"
         E --> F[POS vs ERP 매출 정합성 체크]
         F --> G{거점매장 해당?}
         G -->|Yes| G1["종속매장 매출 -> 거점매장 자동 배분/통합"]
@@ -56,13 +56,13 @@ graph TD
         G2 --> I
     end
 
-    subgraph "F-ONE: Settlement & Journaling"
+    subgraph "F-ONE: 정산 및 전표 생성"
         I --> J[수수료/판촉비/배송비 자동 계산]
         J --> K["정산 데이터 생성 (거점별 합산)"]
         K --> L[One-Click 회계 전표 생성 요청]
     end
 
-    subgraph "AIS: Accounting"
+    subgraph "AIS: 회계 처리"
         L --> M[AIS: 자동 전표 생성 및 인터페이스]
         M --> N["결산 완료 (D+1 목표)"]
     end
@@ -78,16 +78,16 @@ graph TD
 
 ```mermaid
 graph TD
-    A[Settled Sales Data] --> B["F-ONE: Apply Seasonal Commission Rates"]
-    B --> C[Auto-Calculate Deductions]
-    C --> D[Final Payment Amount Calculation]
-    D --> E[System-generated Evidence]
-    E --> F[One-click Trustbill Issuance]
-    F --> G[Payment Authorization]
+    A[정산 매출 데이터] --> B["F-ONE: 시즌별 수수료율 적용"]
+    B --> C[공제 금액 자동 계산]
+    C --> D[최종 지급 금액 산출]
+    D --> E[시스템 증빙 자료 생성]
+    E --> F["원클릭 트러스트빌(세금계산서) 발행"]
+    F --> G[지급 승인]
     
-    subgraph "Security & Integrity"
-        H[Rate History Tracking]
-        I[Permission-based Access]
+    subgraph "보안 및 무결성"
+        H[수수료율 이력 추적]
+        I[권한 기반 접근 통제]
     end
     B --- H
     B --- I
@@ -100,17 +100,17 @@ graph TD
 
 ```mermaid
 graph TD
-    A[Virtual Account Payment] --> B[Real-time F-ONE Sync]
-    B --> C[Auto-Reconciliation with A/R]
-    C --> D[Updated Credit Status]
-    D --> E{"A/R > 1M KRW?"}
-    E -->|Yes| F["Real-time Alert/Popup to Manager"]
-    E -->|No| G[Normal Monitoring]
-    F --> H[Prompt Collection Action]
+    A[가상계좌 입금] --> B[실시간 F-ONE 동기화]
+    B --> C["미수금 자동 반제(수납 처리)"]
+    C --> D[여신 상태 업데이트]
+    D --> E{"미수채권 > 100만원?"}
+    E -->|Yes| F["담당자 실시간 알림/팝업 발송"]
+    E -->|No| G[일반 모니터링]
+    F --> H[즉각적인 채권 회수 조치]
     
-    subgraph "Visibility"
-        I[A/R Aging Dashboard]
-        J[Long-term A/R Tracking]
+    subgraph "가시성 확보"
+        I[미수채권 연령분석 대시보드]
+        J[장기 미수채권 추적]
     end
     D --- I
     D --- J
@@ -123,15 +123,15 @@ graph TD
 
 ```mermaid
 graph TD
-    A[Store Inventory Need] --> B{Self-Consumption?}
-    B -->|Yes| C[Direct Registration at Store App]
-    B -->|No| D[Regular Sales/Transfer]
-    C --> E[Real-time Stock Update]
-    E --> F[Auto-Accounting for Cost]
+    A[매장 재고 수요 발생] --> B{자가소비 여부?}
+    B -->|Yes| C[매장 앱에서 직접 등록]
+    B -->|No| D[일반 판매/이동]
+    C --> E[실시간 재고 반영]
+    E --> F[비용 자동 회계 처리]
     
-    subgraph "Query Optimization"
-        G["Multi-year/Season Integrated Search"]
-        H[Warehouse Optimization History]
+    subgraph "조회 최적화"
+        G["다년차/시즌 통합 조회"]
+        H[창고 최적화 이력 관리]
     end
     G --- D
     H --- D
