@@ -9,8 +9,8 @@ This document visualizes the optimized TO-BE processes for the Next-Gen ERP syst
 
 ```mermaid
 graph TD
-    A[Brand/Business Strategy] --> B{Store Open/Change?}
-    B -->|Yes| C[F-ONE: Integrated Store Management UI]
+    A["Brand/Business Strategy"] --> B{Store Open/Change?}
+    B -->|Yes| C["F-ONE: Integrated Store Management UI"]
     
     subgraph "Master Data Definition"
         C --> D[매장 코드 및 속성 등록]
@@ -23,11 +23,11 @@ graph TD
     F --> G[Ready for Sales/Inventory]
     
     %% Hub-Spoke Concept
-    H[거점매장 (Anchor)] --- I[종속매장 A]
-    H --- J[종속매장 B]
+    H["거점매장 (Anchor)"] --- I["종속매장 A"]
+    H --- J["종속매장 B"]
     
     subgraph "Legacy (AS-IS) Pain Points"
-        K[수기 엑셀로 거점 구조 관리]
+        K["수기 엑셀로 거점 구조 관리"]
     end
     D1 -.->|시스템화| K
 ```
@@ -40,7 +40,7 @@ graph TD
 ```mermaid
 graph TD
     subgraph "POS & Sales Event"
-        A[매장/온라인 매출 발생] --> B{프로모션 적용?}
+        A["매장/온라인 매출 발생"] --> B{프로모션 적용?}
         B -->|Yes| C[실시간 할인/쿠폰 배분 로직 적용]
         B -->|No| D[일반 매출 확정]
         C --> E[POS 매출 데이터 전송]
@@ -50,7 +50,7 @@ graph TD
     subgraph "F-ONE: Validation & Allocation"
         E --> F[POS vs ERP 매출 정합성 체크]
         F --> G{거점매장 해당?}
-        G -->|Yes| G1[종속매장 매출 -> 거점매장 자동 배분/통합]
+        G -->|Yes| G1["종속매장 매출 -> 거점매장 자동 배분/통합"]
         G -->|No| G2[단독 매장 매출 확정]
         G1 --> I[매출 확정 및 매출채권 인식]
         G2 --> I
@@ -58,17 +58,17 @@ graph TD
 
     subgraph "F-ONE: Settlement & Journaling"
         I --> J[수수료/판촉비/배송비 자동 계산]
-        J --> K[정산 데이터 생성 (거점별 합산)]
+        J --> K["정산 데이터 생성 (거점별 합산)"]
         K --> L[One-Click 회계 전표 생성 요청]
     end
 
     subgraph "AIS: Accounting"
         L --> M[AIS: 자동 전표 생성 및 인터페이스]
-        M --> N[결산 완료 (D+1 목표)]
+        M --> N["결산 완료 (D+1 목표)"]
     end
 
     %% Added Hub Logic
-    O[AS-IS: 거점별 매출 수기 재배분] -.->|자동화| G1
+    O["AS-IS: 거점별 매출 수기 재배분"] -.->|자동화| G1
 ```
 
 ---
@@ -78,7 +78,7 @@ graph TD
 
 ```mermaid
 graph TD
-    A[Settled Sales Data] --> B[F-ONE: Apply Seasonal Commission Rates]
+    A[Settled Sales Data] --> B["F-ONE: Apply Seasonal Commission Rates"]
     B --> C[Auto-Calculate Deductions]
     C --> D[Final Payment Amount Calculation]
     D --> E[System-generated Evidence]
@@ -103,8 +103,8 @@ graph TD
     A[Virtual Account Payment] --> B[Real-time F-ONE Sync]
     B --> C[Auto-Reconciliation with A/R]
     C --> D[Updated Credit Status]
-    D --> E{A/R > 1M KRW?}
-    E -->|Yes| F[Real-time Alert/Popup to Manager]
+    D --> E{"A/R > 1M KRW?"}
+    E -->|Yes| F["Real-time Alert/Popup to Manager"]
     E -->|No| G[Normal Monitoring]
     F --> H[Prompt Collection Action]
     
@@ -130,7 +130,7 @@ graph TD
     E --> F[Auto-Accounting for Cost]
     
     subgraph "Query Optimization"
-        G[Multi-year/Season Integrated Search]
+        G["Multi-year/Season Integrated Search"]
         H[Warehouse Optimization History]
     end
     G --- D
